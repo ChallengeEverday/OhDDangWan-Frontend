@@ -1,12 +1,15 @@
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Noto_Sans_KR } from "next/font/google"
 import "@/app/ui/style/reset.css"
 import "@/app/ui/style/variable.css"
 import "@/app/ui/style/globals.css"
 import { Providers } from "./providers"
 import GNB from "@/app/ui/Layout/GNB"
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Noto_Sans_KR({
+  weight: ["300", "700", "800"],
+  subsets: ["latin"],
+})
 
 export const metadata: Metadata = {
   title: "오땡완",
