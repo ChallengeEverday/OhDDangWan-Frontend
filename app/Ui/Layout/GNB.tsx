@@ -15,7 +15,7 @@ import {
 import { usePathname } from "next/navigation"
 import { gnblinks } from "@/app/data/links"
 
-export default function App() {
+export default function GNB() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
 

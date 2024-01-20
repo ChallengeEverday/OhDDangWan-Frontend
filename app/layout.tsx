@@ -4,6 +4,7 @@ import "@/app/style/reset.css"
 import "@/app/style/variable.css"
 import "@/app/style/globals.css"
 import { Providers } from "./providers"
+import GNB from "./Ui/Layout/GNB"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -20,7 +21,10 @@ export default function RootLayout({
   return (
     <html lang="ko" className="light">
       <body className={inter.className}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <GNB />
+          {children}
+        </Providers>
       </body>
     </html>
   )
