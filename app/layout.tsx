@@ -4,7 +4,7 @@ import "@/app/ui/style/globals.css"
 import { Providers } from "./providers"
 import GNB from "@/app/ui/Layout/GNB"
 
-const inter = Noto_Sans_KR({
+const notoSans = Noto_Sans_KR({
   weight: ["300", "400", "700", "800"],
   subsets: ["latin"],
 })
@@ -21,10 +21,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={inter.className}>
+      <body className={notoSans.className}>
         <Providers>
           <GNB />
-          {children}
+          <div className="w-full flex justify-center">
+            <div className="flex px-6 gap-4 w-full flex-row relative flex-nowrap items-center justify-between max-w-[1024px]">
+              {children}
+            </div>
+          </div>
         </Providers>
       </body>
     </html>

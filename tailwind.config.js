@@ -42,8 +42,6 @@ module.exports = {
         "odw-dark": {
           extend: "dark",
           colors: {
-            background: "#1D1D1D",
-            foreground: "#ffffff",
             primary: {
               900: "#FEE9DD",
               800: "#FDCFBB",
