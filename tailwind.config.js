@@ -54,7 +54,7 @@ module.exports = {
               100: "#74102C",
               50: "#74102C",
               DEFAULT: "#F25C54",
-              foreground: "#1D1D1D",
+              foreground: "#ffffff",
             },
             focus: "#F78E7E",
           },

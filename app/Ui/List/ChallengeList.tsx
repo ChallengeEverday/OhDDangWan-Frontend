@@ -51,23 +51,23 @@ const challengeList = [
 
 export default function ChallengeList() {
   return (
-    <div className="gap-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-10">
+    <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-10">
       {challengeList.map(({ title, time, description, members, image, id }) => (
-        <Card key={id} className="py-4">
+        <Card key={id} className="pb-4">
+          <Image
+            aria-hidden
+            alt={title}
+            className="aspect-[5/3] object-cover rounded-b-none"
+            src={image}
+          />
           <CardHeader className="reletive overflow-visible py-0">
             <Chip
               startContent={<IoMdPerson size="16" />}
-              className="flex absolute top-10 right-5 z-20"
+              className="flex absolute top-3 right-2 z-20"
               color="primary"
             >
               {members}
             </Chip>
-            <Image
-              aria-hidden
-              alt={title}
-              className="aspect-[4/3] object-cover rounded-xl"
-              src={image}
-            />
           </CardHeader>
           <CardBody className="pb-0 pt-2 px-4 flex-col items-start">
             <div className="w-full pb-3">
