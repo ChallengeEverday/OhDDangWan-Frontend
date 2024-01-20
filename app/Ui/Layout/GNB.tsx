@@ -15,10 +15,14 @@ import {
 import { usePathname } from "next/navigation"
 import { gnblinks } from "@/app/utils/data/links"
 import Logo from "./Logo"
+import { MdNightlightRound } from "react-icons/md"
+import { MdSunny } from "react-icons/md"
+import { useTheme } from "next-themes"
 
 export default function GNB() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
+  const { theme, setTheme } = useTheme()
 
   return (
     <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
@@ -84,6 +88,25 @@ export default function GNB() {
 
       {/* 공통 UI */}
       <NavbarContent justify="end">
+        <NavbarItem>
+          <Button
+            isIconOnly
+            aria-label={
+              theme !== "odw-dark" ? "다크 모드 전환" : "라이트 모드 전환"
+            }
+            variant="light"
+            href="/login"
+            onClick={() => {
+              setTheme(theme === "odw-dark" ? "odw-light" : "odw-dark")
+            }}
+          >
+            {theme !== "odw-dark" ? (
+              <MdNightlightRound size="25" />
+            ) : (
+              <MdSunny size="25" />
+            )}
+          </Button>
+        </NavbarItem>
         <NavbarItem>
           <Button as={Link} color="primary" href="/login" variant="flat">
             로그인
