@@ -1,13 +1,11 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Image from "next/image"
+import styles from "./page.module.css"
 
 export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <h1 className="text-3xl font-bold underline">
-          Hello world!
-        </h1>
+        <h1 className="text-3xl font-bold underline">Hello world!</h1>
         <p>
           Get started by editing&nbsp;
           <code className={styles.code}>app/page.tsx</code>
@@ -94,5 +92,5 @@ export default function Home() {
         </a>
       </div>
     </main>
-  );
+  )
 }
