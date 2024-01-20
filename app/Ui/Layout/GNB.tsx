@@ -27,13 +27,13 @@ export default function GNB() {
   return (
     <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
       {/* 모바일 UI */}
-      <NavbarContent className="sm:hidden" justify="start">
+      <NavbarContent className="md:hidden" justify="start">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         />
       </NavbarContent>
 
-      <NavbarContent className="sm:hidden pr-3" justify="center">
+      <NavbarContent className="md:hidden pr-3" justify="center">
         <NavbarBrand>
           <Link color="primary" href="/" size="lg">
             <Logo />
@@ -60,7 +60,7 @@ export default function GNB() {
       </NavbarMenu>
 
       {/* 데스크탑 UI */}
-      <NavbarContent className="hidden sm:flex">
+      <NavbarContent className="hidden md:flex">
         <NavbarBrand>
           <Link color="primary" href="/" size="lg">
             <Logo />
@@ -69,7 +69,7 @@ export default function GNB() {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden md:flex gap-4" justify="center">
         {gnblinks.map(({ title, href }) => {
           const isActive = pathname === href
           return (
