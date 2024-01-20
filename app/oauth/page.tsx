@@ -25,9 +25,9 @@ export default function Oauth() {
         "https://kauth.kakao.com/oauth/token",
         payload,
       )
-      console.log({ access_token: res.data.access_token })
+      console.log(res.data)
 
-      return res.data.access_token
+      return res.data
     } catch (err) {
       console.error(err)
     }

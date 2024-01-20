@@ -1,15 +1,15 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
-import "@/app/style/reset.css"
-import "@/app/style/variable.css"
-import "@/app/style/globals.css"
+import "@/app/ui/style/reset.css"
+import "@/app/ui/style/variable.css"
+import "@/app/ui/style/globals.css"
 import { Providers } from "./providers"
-import GNB from "./Ui/Layout/GNB"
+import GNB from "@/app/ui/Layout/GNB"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "오땡완 (오늘 땡땡 완료!)",
+  title: "오땡완",
   description: "오운완, 오공완, 오늘 내가 완료한 챌린지를 인증해요!",
 }
 

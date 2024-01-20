@@ -13,7 +13,7 @@ import {
   Button,
 } from "@nextui-org/react"
 import { usePathname } from "next/navigation"
-import { gnblinks } from "@/app/data/links"
+import { gnblinks } from "@/app/utils/data/links"
 
 export default function GNB() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
