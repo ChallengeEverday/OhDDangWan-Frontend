@@ -14,6 +14,7 @@ import {
 } from "@nextui-org/react"
 import { usePathname } from "next/navigation"
 import { gnblinks } from "@/app/utils/data/links"
+import Logo from "./Logo"
 
 export default function GNB() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -31,7 +32,8 @@ export default function GNB() {
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
           <Link color="primary" href="/" size="lg">
-            <p className="font-bold text-inherit">💪🏻오땡완</p>
+            <Logo />
+            <p className="hidden">오땡완</p>
           </Link>
         </NavbarBrand>
       </NavbarContent>
@@ -57,7 +59,8 @@ export default function GNB() {
       <NavbarContent className="hidden sm:flex">
         <NavbarBrand>
           <Link color="primary" href="/" size="lg">
-            <p className="font-bold text-inherit">💪🏻오땡완</p>
+            <Logo />
+            <p className="hidden">오땡완</p>
           </Link>
         </NavbarBrand>
       </NavbarContent>
