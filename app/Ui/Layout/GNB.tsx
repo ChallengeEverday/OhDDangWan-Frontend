@@ -30,7 +30,9 @@ export default function GNB() {
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
-          <p className="font-bold text-inherit">💪🏻오땡완</p>
+          <Link color="primary" href="/" size="lg">
+            <p className="font-bold text-inherit">💪🏻오땡완</p>
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
@@ -54,7 +56,9 @@ export default function GNB() {
       {/* 데스크탑 UI */}
       <NavbarContent className="hidden sm:flex">
         <NavbarBrand>
-          <p className="font-bold text-inherit">💪🏻오땡완</p>
+          <Link color="primary" href="/" size="lg">
+            <p className="font-bold text-inherit">💪🏻오땡완</p>
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
