@@ -1,13 +1,11 @@
 import type { Metadata } from "next"
 import { Noto_Sans_KR } from "next/font/google"
-import "@/app/ui/style/reset.css"
-import "@/app/ui/style/variable.css"
 import "@/app/ui/style/globals.css"
 import { Providers } from "./providers"
 import GNB from "@/app/ui/Layout/GNB"
 
 const inter = Noto_Sans_KR({
-  weight: ["300", "700", "800"],
+  weight: ["300", "400", "700", "800"],
   subsets: ["latin"],
 })
 
@@ -22,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ko" className="light">
+    <html lang="ko">
       <body className={inter.className}>
         <Providers>
           <GNB />
