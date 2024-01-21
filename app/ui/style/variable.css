@@ -1,0 +1,73 @@
+:root {
+    /* Mode 1 */
+    /* colors */
+    --odw-black: #040404;
+    --odw-white: #ffffff;
+    --odw-gray: #d1d1d1;
+    --odw-gray-light: #ebebeb;
+    --odw-gray-lightest: #f7f7f7;
+    --odw-gray-dark: #a1a1a1;
+    --odw-gray-darkest: #6b6b6b;
+    --odw-blue: #007bff;
+    --odw-blue-soft: #e6f0ff;
+    --odw-red: #dc3545;
+    --odw-red-soft: #f8e6e8;
+    --odw-orange: #fd7e14;
+    
+
+    /* numbers */
+    --radius-4: 0.25rem;
+    --radius-16: 1rem;
+    --radius-24: 1.5rem;
+    --radius-32: 2rem;
+
+    --spacing-8: 0.5rem;
+    --spacing-12: 0.75rem;
+    --spacing-16: 1rem;
+    --spacing-20: 1.25rem;
+    --spacing-24: 1.5rem;
+    --spacing-32: 2rem;
+    --spacnig-48: 3rem;
+    --spacing-72: 4.5rem;
+
+    --font-12: 0.75rem;
+    --font-14: 0.875rem;
+    --font-16: 1rem;
+    --font-20: 1.25rem;
+    --font-24: 1.5rem;
+
+    --size-16: 1rem;
+    --size-20: 1.25rem;
+    --size-24: 1.5rem;
+
+  
+    --c-bg: var(--odw-white);
+    --c-bg-sub: var(--odw-gray-lightest);
+    --c-bg-inverse: var(--odw-black);
+
+    --c-border: var(--odw-gray);
+
+    --c-text: var(--odw-black);
+    --c-text-sub: var(--odw-gray);
+    --c-text-soft: var(--odw-gray-dark);
+    --c-text-placehold: var(--odw-gray-light);
+
+    --c-primary: var(--odw-blue);
+    --c-primary-text: var(--odw-white);
+
+    --c-danger: var(--odw-red);
+    --c-danger-soft: var(--odw-red-soft);
+    --c-danger-text: var(--odw-white);
+
+    --c-warning: var(--odw-orange);
+  
+    @media (prefers-color-scheme: dark) {
+      --c-bg: var(--odw-black);
+      --c-text: var(--odw-white);
+      --c-text-sub: var(--odw-gray);
+      --c-text-placehold: var(--odw-gray-light);
+      --c-primary: var(--odw-blue);
+      --c-danger: var(--odw-red);
+      --c-warning: var(--odw-orange);
+    }
+  }
