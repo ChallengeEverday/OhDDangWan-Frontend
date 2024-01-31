@@ -12,11 +12,12 @@ export default function Page({ params }: { params: { challengeId: string } }) {
   const challenge = {
     title: "오운완 챌린지",
     time: "10분전 인증",
-    description: "맨날 달리기 운동해요! 사진으로 인증해요.",
+    description: "맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 마지막",
     members: 120,
-    image: "/running.avif",
+    // image: "/running.avif",
+    image: "/hani1.jpg",
     id: 1,
-    details: ["매일", "1년동안"],
+    details: ["매일", "1년동안", "11", "ㅎㅎㅎㅎ", "ㅁ[렁", "으앙", "시간이", "간다"],
     master: {
       name: "팜하니",
       avatar: "/hani1.jpg",
@@ -24,41 +25,55 @@ export default function Page({ params }: { params: { challengeId: string } }) {
   }
 
   return (
-    <div className="flex py-10">
-      <Image
-        aria-hidden
-        alt={challenge.title}
-        // TODO: aspect-square 안먹음
-        className="aspect-square object-cover"
-        src={challenge.image}
-      />
+    <div className="my-10 relative">
+       <Chip
+          variant="solid"
+          color="primary"
+          className="text-tiny py-2 m-3 absolute z-40 left-0"
+        >
+          {challenge.time}
+        </Chip>
+      <div className="flex flex-col justify-center gap-5 relative md:flex-row">
+        <Image
+          aria-hidden
+          alt={challenge.title}
+          removeWrapper
+          className="aspect-[5/3] object-cover md:aspect-[4/3] md:w-1/2 w-full"
+          src={challenge.image}
+        />
 
-      <section className="pb-0 pt-2 px-4 flex-col items-start">
-        <div className="w-full pb-3">
-          <div className="w-full flex justify-between items-center">
-            <h2 className="font-bold text-large">{challenge.title}</h2>
-            <User
-              name={challenge.master.name}
-              // description="Product Designer"
-              avatarProps={{
-                src: challenge.master.avatar,
-              }}
-            />
-            <p className="text-tiny text-default-500">{challenge.time}</p>
-          </div>
-        </div>
-        <Divider />
-        <div className="w-full pt-3 truncate">
-          <p className="truncate">{challenge.description}</p>
-        </div>
-        <div className="w-full select-none flex overflow-x-scroll pt-3">
-          {challenge.details &&
-            challenge.details.map((detail) => (
-              <Chip key={detail} variant="bordered" className="mr-1">
-                #{detail}
-              </Chip>
+
+        <Card shadow="sm" className="w-full pb-14 pt-2 px-4 flex-col items-start">
+          <CardHeader className="w-full flex justify-between items-center">
+            <h2 className="font-bold text-xl md:text-2xl">{challenge.title}</h2>
+          </CardHeader>
+          <Divider />
+          <CardBody className="w-fullpt-3 md:max-h-80">
+            <div>
+              <User
+                name={challenge.master.name}
+                // description="Product Designer"
+                avatarProps={{
+                  src: challenge.master.avatar,
+                }}
+              />
+            </div>
+            <p>{challenge.description}</p>
+          </CardBody>
+
+          <div className="w-full select-none flex overflow-x-scroll p-4 z-10 absolute left-0 bottom-0">
+            {challenge.details &&
+              challenge.details.map((detail) => (
+                <Chip key={detail} variant="bordered" className="mr-1">
+                  #{detail}
+                </Chip>
             ))}
-        </div>
+          </div>
+        </Card>
+      </div>
+
+      <section className="my-10 bg-red-100 w-full h-96">
+        달력
       </section>
     </div>
   )

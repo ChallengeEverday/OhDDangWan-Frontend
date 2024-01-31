@@ -25,7 +25,7 @@ export default function RootLayout({
         <Providers>
           <GNB />
           <div className="w-full flex justify-center">
-            <div className="flex px-6 gap-4 w-full flex-row relative flex-nowrap items-center justify-between max-w-[1024px]">
+            <div className="flex px-6 gap-4 w-full flex-row relative flex-nowrap items-center justify-center max-w-[1024px]">
               {children}
             </div>
           </div>
