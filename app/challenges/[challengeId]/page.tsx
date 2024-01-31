@@ -28,11 +28,11 @@ export default function Page({ params }: { params: { challengeId: string } }) {
   }
 
   return (
-    <div className="my-10 relative">
+    <div className="my-5 md:my-10 relative">
        <Chip
           variant="solid"
           color="primary"
-          className="text-tiny py-2 m-3 absolute z-40 left-0"
+          className="text-tiny py-2 m-3 absolute z-20 left-0"
         >
           {challenge.time}
         </Chip>
