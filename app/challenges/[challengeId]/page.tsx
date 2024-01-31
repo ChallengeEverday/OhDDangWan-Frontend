@@ -6,7 +6,9 @@ import {
   Image,
   Divider,
   Chip,
+  Button,
 } from "@nextui-org/react"
+import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 
 export default function Page({ params }: { params: { challengeId: string } }) {
   const challenge = {
@@ -22,6 +24,7 @@ export default function Page({ params }: { params: { challengeId: string } }) {
       name: "팜하니",
       avatar: "/hani1.jpg",
     },
+    isLiked: false,
   }
 
   return (
@@ -42,12 +45,19 @@ export default function Page({ params }: { params: { challengeId: string } }) {
           src={challenge.image}
         />
 
-
         <Card shadow="sm" className="w-full pb-14 pt-2 px-4 flex-col items-start">
           <CardHeader className="w-full flex justify-between items-center">
             <h2 className="font-bold text-xl md:text-2xl">{challenge.title}</h2>
+            <div className="flex gap-1">
+              <Button color="primary" variant="light" isIconOnly>
+                { challenge.isLiked ? <IoIosHeart size="24" /> : <IoIosHeartEmpty size="24" /> }
+              </Button>
+              <Button color="primary">참여하기</Button>
+            </div>
           </CardHeader>
+
           <Divider />
+
           <CardBody className="w-fullpt-3 md:max-h-80">
             <div>
               <User
