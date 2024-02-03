@@ -9,15 +9,18 @@ import {
   NavbarItem,
   NavbarMenu,
   NavbarMenuItem,
-  Link,
+  Link as UiLink,
   Button,
+  Avatar,
 } from "@nextui-org/react"
+import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { gnblinks } from "@/app/utils/data/links"
 import Logo from "./Logo"
 import { MdNightlightRound } from "react-icons/md"
 import { MdSunny } from "react-icons/md"
 import { useTheme } from "next-themes"
+import { useUserInfoStore } from "@/app/utils/store/userInfoStore"
 
 export default function GNB() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -35,7 +38,7 @@ export default function GNB() {
 
       <NavbarContent className="md:hidden pr-3" justify="center">
         <NavbarBrand>
-          <Link color="primary" href="/" size="lg">
+          <Link color="primary" href="/">
             <Logo />
             <p className="hidden">오땡완</p>
           </Link>
@@ -47,11 +50,7 @@ export default function GNB() {
           const isActive = pathname === href
           return (
             <NavbarMenuItem key={title} isActive={isActive}>
-              <Link
-                color={isActive ? "primary" : "foreground"}
-                href={href}
-                size="lg"
-              >
+              <Link color={isActive ? "primary" : "foreground"} href={href}>
                 {title}
               </Link>
             </NavbarMenuItem>
@@ -62,7 +61,7 @@ export default function GNB() {
       {/* 데스크탑 UI */}
       <NavbarContent className="hidden md:flex">
         <NavbarBrand>
-          <Link color="primary" href="/" size="lg">
+          <Link color="primary" href="/">
             <Logo />
             <p className="hidden">오땡완</p>
           </Link>
@@ -74,11 +73,7 @@ export default function GNB() {
           const isActive = pathname === href
           return (
             <NavbarItem key={title} isActive={isActive}>
-              <Link
-                color={isActive ? "primary" : "foreground"}
-                href={href}
-                size="lg"
-              >
+              <Link color={isActive ? "primary" : "foreground"} href={href}>
                 {title}
               </Link>
             </NavbarItem>
@@ -108,11 +103,29 @@ export default function GNB() {
           </Button>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="/login" variant="flat">
-            로그인
-          </Button>
+          <GNBUserSelction />
         </NavbarItem>
       </NavbarContent>
     </Navbar>
+  )
+}
+
+function GNBUserSelction() {
+  const userInfo = useUserInfoStore((state) => state.userInfo)
+
+  if (userInfo) {
+    const { nickname, profileImageUrl } = userInfo
+
+    return (
+      <Link href="/my">
+        <Avatar name={nickname} src={profileImageUrl} />
+      </Link>
+    )
+  }
+
+  return (
+    <Button as={Link} color="primary" href="/login" variant="flat">
+      로그인
+    </Button>
   )
 }
