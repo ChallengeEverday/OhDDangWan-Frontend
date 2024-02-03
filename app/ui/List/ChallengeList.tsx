@@ -57,7 +57,7 @@ const challengeList = [
 
 export default function ChallengeList() {
   return (
-    <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 my-5 md:my-10">
+    <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
       {challengeList.map(
         ({ title, time, description, members, image, id, details }) => (
           <Link key={id} href={`./challenges/${id}`}>
