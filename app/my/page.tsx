@@ -4,16 +4,20 @@ import { useRouter } from "next/navigation"
 import { useUserInfoStore } from "../utils/store/userInfoStore"
 import { Avatar, Divider } from "@nextui-org/react"
 import ChallengeList from "../ui/List/ChallengeList"
+import { useEffect } from "react"
 
 export default function MyPage() {
   const router = useRouter()
   const userInfo = useUserInfoStore((state) => state.userInfo)
 
-  if (!userInfo) {
-    // TODO: Toast message
-    router.push("/")
-    return null
-  }
+  useEffect(() => {
+    if (!userInfo) {
+      // TODO: Toast message
+      router.push("/")
+    }
+  }, [userInfo])
+
+  if (!userInfo) return null
 
   const { nickname, profileImageUrl } = userInfo
 
