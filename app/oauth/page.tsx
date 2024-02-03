@@ -12,7 +12,7 @@ export default function Oauth() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const code = searchParams.get("code")
-  const { setUserInfo } = useUserInfoStore((state) => state.actions)
+  const setUserInfo = useUserInfoStore((state) => state.setUserInfo)
 
   const getPayload = () =>
     QueryString.stringify({
