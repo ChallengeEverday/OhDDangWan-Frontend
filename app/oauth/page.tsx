@@ -12,7 +12,7 @@ export default function Oauth() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const code = searchParams.get("code")
-  const actions = useUserInfoStore((state) => state.actions)
+  const setUserInfo = useUserInfoStore((state) => state.setUserInfo)
 
   const getPayload = () =>
     QueryString.stringify({
@@ -47,7 +47,7 @@ export default function Oauth() {
 
         // 유저 정보 가져오기
         const userInfo = await get_user_myProfile()
-        actions.setUserInfo(userInfo.data)
+        setUserInfo(userInfo.data)
       }
     } catch (err) {
       console.error(err)

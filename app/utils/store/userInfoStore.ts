@@ -5,6 +5,9 @@ import { ZustandCreateStore } from "../types/zustand"
 
 type UserInfoStore = {
   userInfo: Profile | null
+
+  setUserInfo: (userInfo: Profile) => void
+  removeUserInfo: () => void
 }
 
 type UserInfoActions = {
@@ -16,6 +19,9 @@ type ZustandUserInfoStore = ZustandCreateStore<UserInfoStore, UserInfoActions>
 
 const createUserInfoStore: ZustandUserInfoStore = (set) => ({
   userInfo: null,
+
+  setUserInfo: (userInfo) => set({ userInfo }),
+  removeUserInfo: () => set({ userInfo: null }),
 
   actions: {
     setUserInfo: (userInfo) => set({ userInfo }),
