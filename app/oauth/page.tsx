@@ -4,12 +4,15 @@ import axios from "axios"
 import { useRouter, useSearchParams } from "next/navigation"
 import QueryString from "qs"
 import { useEffect } from "react"
-import api from "../utils/service/api"
+import { post_oauth_login } from "../utils/service/auth"
+import { get_user_myProfile } from "../utils/service/account"
+import { useUserInfoStore } from "../utils/store/userInfoStore"
 
 export default function Oauth() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const code = searchParams.get("code")
+  const actions = useUserInfoStore((state) => state.actions)
 
   const getPayload = () =>
     QueryString.stringify({
@@ -39,18 +42,17 @@ export default function Oauth() {
       const accessToken = await getKakaoAccessToken(getPayload())
 
       if (accessToken) {
-        const result = await api.post("/v1/oauth/login", {
-          accessToken,
-        })
-        console.log(result)
+        // 로그인하기
+        await post_oauth_login(accessToken)
+
+        // 유저 정보 가져오기
+        const userInfo = await get_user_myProfile()
+        actions.setUserInfo(userInfo.data)
       }
-
-      // window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY)
-      // window.Kakao.Auth.setAccessToken(res.data.access_token)
-
-      router.push("/")
     } catch (err) {
       console.error(err)
+    } finally {
+      router.push("/")
     }
   }
 
