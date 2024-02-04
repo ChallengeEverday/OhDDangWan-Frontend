@@ -21,6 +21,7 @@ import { MdNightlightRound } from "react-icons/md"
 import { MdSunny } from "react-icons/md"
 import { useTheme } from "next-themes"
 import { useUserInfoStore } from "@/app/utils/store/userInfoStore"
+import { GoPlus } from "react-icons/go"
 
 export default function GNB() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -56,6 +57,28 @@ export default function GNB() {
             </NavbarMenuItem>
           )
         })}
+        <NavbarMenuItem>
+          <Button
+            aria-label={
+              theme !== "odw-dark" ? "다크 모드 전환" : "라이트 모드 전환"
+            }
+            variant="light"
+            href="/login"
+            onClick={() => {
+              setTheme(theme === "odw-dark" ? "odw-light" : "odw-dark")
+            }}
+          >
+            {theme !== "odw-dark" ? (
+              <>
+                <MdNightlightRound size="25" /> 다크 모드
+              </>
+            ) : (
+              <>
+                <MdSunny size="25" /> 라이트 모드
+              </>
+            )}
+          </Button>
+        </NavbarMenuItem>
       </NavbarMenu>
 
       {/* 데스크탑 UI */}
@@ -81,9 +104,9 @@ export default function GNB() {
         })}
       </NavbarContent>
 
-      {/* 공통 UI */}
+      {/* 오른쪽 UI */}
       <NavbarContent justify="end">
-        <NavbarItem>
+        <NavbarItem className="hidden md:flex">
           <Button
             isIconOnly
             aria-label={
@@ -117,9 +140,21 @@ function GNBUserSelction() {
     const { nickname, profileImageUrl } = userInfo
 
     return (
-      <Link href="/my">
-        <Avatar name={nickname} src={profileImageUrl} />
-      </Link>
+      <div className="flex gap-2 items-center">
+        <Button
+          as={Link}
+          href="/challenges/create"
+          variant="flat"
+          className="rounded-full w-11 h-11"
+          color="primary"
+          isIconOnly
+        >
+          <GoPlus size="25" />
+        </Button>
+        <Link href="/my">
+          <Avatar name={nickname} src={profileImageUrl} />
+        </Link>
+      </div>
     )
   }
 
