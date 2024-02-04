@@ -1,6 +1,6 @@
 "use client"
 
-import { Card, Chip, Divider, Input, Textarea } from "@nextui-org/react"
+import { Card, Chip, Divider, Image, Input, Textarea } from "@nextui-org/react"
 import { useRef, useState } from "react"
 import { LuUpload } from "react-icons/lu"
 
@@ -10,14 +10,6 @@ export default function CreateChallengePage() {
 
   const photoRef = useRef<HTMLInputElement>(null)
   const [photo, setPhoto] = useState<File | null>(null)
-
-  const previewStyle = photo
-    ? {
-        background: `url(${URL.createObjectURL(photo)})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }
-    : {}
 
   return (
     <main className="w-full">
@@ -45,10 +37,19 @@ export default function CreateChallengePage() {
               onClick={() => {
                 photoRef.current?.click()
               }}
-              style={previewStyle}
               className="w-full h-full relative flex flex-col justify-center items-center"
             >
-              <div className="rounded-full py-2 px-4 text-sm bg-foreground-100/[.5]">
+              {photo && (
+                <Image
+                  src={photo ? URL.createObjectURL(photo) : ""}
+                  alt="대표사진"
+                  className="object-cover w-full h-full"
+                  height={80}
+                  removeWrapper
+                />
+              )}
+
+              <div className="absolute z-20 rounded-full py-2 px-4 text-sm bg-foreground-100/[.5]">
                 <span className="flex justify-center gap-2 items-center">
                   <LuUpload size={20} />
                   대표사진 업로드
