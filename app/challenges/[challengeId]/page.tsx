@@ -1,3 +1,4 @@
+import ChallengeCalendar from "@/app/ui/ChallengeCalendar"
 import {
   Card,
   User,
@@ -8,6 +9,7 @@ import {
   Chip,
   Button,
 } from "@nextui-org/react"
+import dayjs from "dayjs"
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io"
 
 export default function Page({ params }: { params: { challengeId: string } }) {
@@ -36,6 +38,29 @@ export default function Page({ params }: { params: { challengeId: string } }) {
     },
     isLiked: false,
   }
+
+  const events = [
+    {
+      id: 0,
+      title: '런닝 챌린지',
+      date: dayjs("2024-02-07"),
+    },
+    {
+      id: 1,
+      title: '런닝 챌린지',
+      date: dayjs("2024-02-08"),
+    },
+    {
+      id: 2,
+      title: '샐러드 먹기',
+      date: dayjs("2024-02-13"),
+    },
+    {
+      id: 3,
+      title: '런닝 챌린지',
+      date: dayjs("2024-02-014"),
+    },
+  ]
 
   return (
     <div className="relative">
@@ -99,7 +124,9 @@ export default function Page({ params }: { params: { challengeId: string } }) {
         </Card>
       </div>
 
-      <section className="my-10 bg-red-100 w-full h-96">달력</section>
+      <section className="my-10 w-full bg-red-50 h-96">
+        <ChallengeCalendar events={events} />
+      </section>
     </div>
   )
 }
