@@ -51,7 +51,11 @@ export default function Calendar({ events, defaultDayjs, views }: CalendarProps)
           <div key={i} className="flex">
             {
               week.map((day, j) => (
-                <div key={j} className="w-full border-1 border-gray-200 flex items-center justify-center">
+                <div
+                  key={j}
+                  style={borderStyle(i, j, weeks.length, week.length)}
+                  className="w-full @apply border-default-100 #{!important} flex items-center justify-center"
+                >
                   <CalendarDate
                     date={day}
                     events={events?.filter(event => {
@@ -69,9 +73,55 @@ export default function Calendar({ events, defaultDayjs, views }: CalendarProps)
   )
 }
 
+const borderStyle = (i: number, j: number, iLength: number, jLength: number) => {
+  const border = '1px solid #e5e5e5'
+  let style = {
+    borderBottom: border,
+    borderRight: border,
+  } as any
+
+  if (i === 0) {
+    style = {
+      ...style,
+      borderTop: border,
+    }
+  }
+  if (j === 0) {
+    style = {
+      ...style,
+      borderLeft: border,
+    }
+  }
+  if(i === 0 && j === 0) {
+    style = {
+      ...style,
+      borderTopLeftRadius: '5px',
+    }
+  }
+  if(i === 0 && j === jLength - 1) {
+    style = {
+    ...style,
+    borderTopRightRadius: '5px',
+    }
+  }
+  if(i === iLength - 1 && j === 0) {
+    style = {
+    ...style,
+    borderBottomLeftRadius: '5px',
+    }
+  }
+  if(i === iLength - 1 && j === jLength - 1) {
+    style = {
+    ...style,
+    borderBottomRightRadius: '5px',
+    }
+  }
+  return style
+}
+
 function CalendarDate({ date, events }: { date: dayjs.Dayjs, events?: ChallengeEvent[] }) {
   return (
-    <div className="flex flex-col w-full h-36 text-sm">
+    <div className="flex p-1 flex-col w-full h-36 text-sm">
       <div className="w-full flex justify-end text-foreground-500">{date.format('D')}일</div>
       <div className="w-full flex flex-col gap-2">
         {events?.slice(0, 3).map(event => (
