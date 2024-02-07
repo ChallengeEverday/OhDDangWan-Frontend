@@ -43,22 +43,47 @@ export default function Page({ params }: { params: { challengeId: string } }) {
     {
       id: 0,
       title: '런닝 챌린지',
-      date: dayjs("2024-02-07"),
+      date: "2024-02-07",
     },
     {
       id: 1,
       title: '런닝 챌린지',
-      date: dayjs("2024-02-08"),
+      date: "2024-02-08",
     },
     {
       id: 2,
       title: '샐러드 먹기',
-      date: dayjs("2024-02-13"),
+      date: "2024-02-13",
+    },
+    {
+      id: 22,
+      title: '샐러드 먹기',
+      date: "2024-02-13",
     },
     {
       id: 3,
       title: '런닝 챌린지',
-      date: dayjs("2024-02-014"),
+      date: "2024-02-14",
+    },
+    {
+      id: 4,
+      title: '런닝 챌린지',
+      date: "2024-02-14",
+    },
+    {
+      id: 5,
+      title: '런닝 챌린지',
+      date: "2024-02-14",
+    },
+    {
+      id: 6,
+      title: '런닝 챌린지',
+      date: "2024-02-14",
+    },
+    {
+      id: 7,
+      title: '런닝 챌린지',
+      date: "2024-02-14",
     },
   ]
 
@@ -124,7 +149,7 @@ export default function Page({ params }: { params: { challengeId: string } }) {
         </Card>
       </div>
 
-      <section className="my-10 w-full bg-red-50 h-96">
+      <section className="my-10 w-full">
         <ChallengeCalendar events={events} />
       </section>
     </div>

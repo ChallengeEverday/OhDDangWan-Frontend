@@ -8,7 +8,7 @@ import { useMemo, useState } from "react"
 export type ChallengeEvent = {
   id: number
   title: string
-  date: dayjs.Dayjs
+  date: string
 }
 
 export type View = 'month' | 'agenda'
@@ -51,14 +51,44 @@ export default function Calendar({ events, defaultDayjs, views }: CalendarProps)
           <div key={i} className="flex">
             {
               week.map((day, j) => (
-                <div key={j} className="w-full border-1 border-black h-12 flex items-center justify-center">
-                  {day.format('D')}
+                <div key={j} className="w-full border-1 border-gray-200 flex items-center justify-center">
+                  <CalendarDate
+                    date={day}
+                    events={events?.filter(event => {
+                      const dayjsDate = dayjs(event.date)
+                      return dayjsDate.isSame(day, 'day')
+                    })}
+                  />
                 </div>
               ))
             }
           </div>
         ))
       }
+    </div>
+  )
+}
+
+function CalendarDate({ date, events }: { date: dayjs.Dayjs, events?: ChallengeEvent[] }) {
+  return (
+    <div className="flex flex-col w-full h-36 text-sm">
+      <div className="w-full flex justify-end text-foreground-500">{date.format('D')}일</div>
+      <div className="w-full flex flex-col gap-2">
+        {events?.slice(0, 3).map(event => (
+          <div className="bg-success-100 px-2" key={event.id}>
+            {event.title}
+          </div>
+        ))}
+        {
+          events?.length && events.length > 3
+            ? (
+                <div className="bg-success-100 px-2">
+                +{events.length - 3}
+                </div>
+            )
+            : null
+        }
+      </div>
     </div>
   )
 }
