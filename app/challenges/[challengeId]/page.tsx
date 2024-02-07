@@ -9,7 +9,6 @@ import {
   Chip,
   Button,
 } from "@nextui-org/react"
-import dayjs from "dayjs"
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io"
 
 export default function Page({ params }: { params: { challengeId: string } }) {
