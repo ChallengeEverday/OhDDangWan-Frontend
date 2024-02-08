@@ -1,4 +1,4 @@
-export default function Completeds({params}) {
+export default function Completeds() {
   return (
     <div>
       <h1>Complete</h1>
