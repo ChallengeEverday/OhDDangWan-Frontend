@@ -3,7 +3,10 @@
 import { getMonthOfWeeks } from "@/app/utils/dayjs"
 import { Button } from "@nextui-org/react"
 import dayjs from "dayjs"
+import Link from "next/link"
+import { useParams } from "next/navigation"
 import { useMemo, useState } from "react"
+import { Tooltip } from 'react-tooltip';
 
 export type ChallengeEvent = {
   id: number
@@ -119,26 +122,57 @@ const borderStyle = (i: number, j: number, iLength: number, jLength: number) => 
   return style
 }
 
+const MAX_EVENTS = 3
+
 function CalendarDate({ date, events }: { date: dayjs.Dayjs, events?: ChallengeEvent[] }) {
   return (
     <div className="flex p-1 flex-col w-full h-36 text-sm">
       <div className="w-full flex justify-end text-foreground-500">{date.format('D')}일</div>
       <div className="w-full flex flex-col gap-2">
-        {events?.slice(0, 3).map(event => (
-          <div className="bg-success-100 px-2" key={event.id}>
-            {event.title}
-          </div>
+        {events?.slice(0, MAX_EVENTS).map(event => (
+          <EventDetailLink key={event.id} event={event} date={date} />
         ))}
         {
-          events?.length && events.length > 3
-            ? (
-                <div className="bg-success-100 px-2">
-                +{events.length - 3}
-                </div>
-            )
+          events?.length && events.length > MAX_EVENTS
+            ? <EventMoreLink events={events} date={date} />
             : null
         }
       </div>
     </div>
+  )
+}
+
+function EventDetailLink({ event, date }: { event: ChallengeEvent, date: dayjs.Dayjs }) {
+  const params = useParams()
+  return (
+    <Link href={`./${params.challengeId}/${date.format("YYYY-MM-DD")}/completeds/${event.id}`} className="bg-success-100 px-2">
+      {event.title}
+    </Link>
+  )
+}
+
+function EventMoreLink({ events, date }: { events: ChallengeEvent[], date: dayjs.Dayjs }) {
+  const params = useParams()
+  const url = `./${params.challengeId}/${date.format("YYYY-MM-DD")}/completeds`
+
+  return (
+    <>
+      <Link
+        href={url}
+        data-tooltip-id={url}
+        className="bg-success-100 px-2"
+      >
+        +{events.length - MAX_EVENTS}
+      </Link>
+      <Tooltip id={url}>
+        <div className="flex flex-col gap-2">
+          {events.slice(MAX_EVENTS).map(event => (
+            <span key={event.id}>
+              {event.title}
+            </span>
+          ))}
+        </div>
+      </Tooltip>
+    </>
   )
 }
