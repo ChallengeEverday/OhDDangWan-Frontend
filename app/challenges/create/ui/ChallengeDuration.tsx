@@ -1,9 +1,18 @@
 import { Divider, Input } from "@nextui-org/react"
 import { useState } from "react"
 import { 요일별한글, type 요일 } from "@/app/utils/dayjs"
+import dayjs from "dayjs"
+
+const AFTER_MIN_DAY = 3
+const MIN_DURATION = 7
 
 export default function ChallengeDuration() {
   const [day, setDay] = useState<요일[]>([])
+  const minStartDate = dayjs().add(AFTER_MIN_DAY, "day").format("YYYY-MM-DD")
+  const minEndDate = dayjs()
+    .add(AFTER_MIN_DAY + MIN_DURATION, "day")
+    .format("YYYY-MM-DD")
+
   return (
     <>
       <h2 className="font-bold text-xl mt-6 md:text-2xl">챌린지 기간</h2>
@@ -20,6 +29,7 @@ export default function ChallengeDuration() {
             classNames={{
               label: "font-bold text-base",
             }}
+            min={minStartDate}
           />
         </section>
         <section className="w-full md:w-1/2">
@@ -33,6 +43,7 @@ export default function ChallengeDuration() {
             classNames={{
               label: "font-bold text-base",
             }}
+            min={minEndDate}
           />
         </section>
       </div>
