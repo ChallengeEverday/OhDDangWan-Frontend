@@ -1,13 +1,14 @@
 import { Divider, Input } from "@nextui-org/react"
-import { useState } from "react"
-import { 요일별한글, type 요일 } from "@/app/utils/dayjs"
+import { 요일별한글 } from "@/app/utils/dayjs"
 import dayjs from "dayjs"
+import { useChallengeForm } from "@/app/utils/hooks/useCreateChallengeFormState"
 
 const AFTER_MIN_DAY = 3
 const MIN_DURATION = 7
 
 export default function ChallengeDuration() {
-  const [day, setDay] = useState<요일[]>([])
+  const [challengeForm, dispatch] = useChallengeForm()
+
   const minStartDate = dayjs().add(AFTER_MIN_DAY, "day").format("YYYY-MM-DD")
   const minEndDate = dayjs()
     .add(AFTER_MIN_DAY + MIN_DURATION, "day")
@@ -29,6 +30,15 @@ export default function ChallengeDuration() {
             classNames={{
               label: "font-bold text-base",
             }}
+            value={challengeForm.challengeStartTime}
+            onChange={(e) => {
+              console.log(e.target.value)
+              dispatch({
+                type: "SET_CHALLENGE_START_TIME",
+                challengeStartTime: e.target.value,
+              })
+            }}
+            name="challengeStartTime"
             min={minStartDate}
           />
         </section>
@@ -50,17 +60,23 @@ export default function ChallengeDuration() {
       <div className="my-4">
         <h2 className="mb-1 font-bold text-base">인증 주기</h2>
         <div className="w-full overflow-x-scroll flex gap-1">
-          {요일별한글.map((요일) => (
+          {요일별한글.map((요일, idx) => (
             <DayButton
               key={요일}
               onClick={() => {
-                if (day.includes(요일)) {
-                  setDay(day.filter((d) => d !== 요일))
+                if (challengeForm.challengeWeekly[idx]) {
+                  dispatch({
+                    type: "REMOVE_CHALLENGE_WEEKLY",
+                    challengeWeekly: 요일,
+                  })
                 } else {
-                  setDay([...day, 요일])
+                  dispatch({
+                    type: "ADD_CHALLENGE_WEEKLY",
+                    challengeWeekly: 요일,
+                  })
                 }
               }}
-              selected={day.includes(요일)}
+              selected={challengeForm.challengeWeekly[idx]}
             >
               {요일}
             </DayButton>

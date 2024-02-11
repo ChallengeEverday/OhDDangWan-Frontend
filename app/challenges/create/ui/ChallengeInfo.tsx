@@ -1,16 +1,20 @@
+import { useChallengeForm } from "@/app/utils/hooks/useCreateChallengeFormState"
 import { Card, Chip, Divider, Image, Input, Textarea } from "@nextui-org/react"
 import { useRef, useState } from "react"
 import { LuUpload } from "react-icons/lu"
 
 export default function ChallengeInfo() {
+  const [challengeForm, dispatch] = useChallengeForm()
+
   const [tag, setTag] = useState<string>("")
-  const [tags, setTags] = useState<string[]>([])
 
   const photoRef = useRef<HTMLInputElement>(null)
   const [photo, setPhoto] = useState<File | null>(null)
 
   return (
     <>
+      {JSON.stringify(challengeForm)}
+
       <h2 className="font-bold text-xl mt-2 md:text-2xl">챌린지 정보</h2>
       <Divider className="mt-1 mb-3 md:mb-6 md:mt-2" />
 
@@ -27,17 +31,32 @@ export default function ChallengeInfo() {
               classNames={{
                 label: "font-bold text-base",
               }}
+              value={challengeForm.title}
+              onChange={(e) => {
+                dispatch({
+                  type: "SET_TITLE",
+                  title: e.target.value,
+                })
+              }}
             />
           </div>
           <div className="w-full">
             <Textarea
               variant="bordered"
               label="챌린지 소개"
+              isRequired
               labelPlacement="outside"
               placeholder="예시) 매일 운동하고 인증해요! 헬스, 필라테스, 런닝, 홈트레이닝, 어떤 운동이든 함께 해봐요!"
               className="col-span-12 md:col-span-6"
               classNames={{
                 label: "font-bold text-base",
+              }}
+              value={challengeForm.description}
+              onChange={(e) => {
+                dispatch({
+                  type: "SET_DESCRIPTION",
+                  description: e.target.value,
+                })
               }}
             />
           </div>
@@ -50,6 +69,13 @@ export default function ChallengeInfo() {
               className="col-span-12 md:col-span-6"
               classNames={{
                 label: "font-bold text-base",
+              }}
+              value={challengeForm.authenticationDescription}
+              onChange={(e) => {
+                dispatch({
+                  type: "SET_AUTHENTICATION_DESCRIPTION",
+                  authenticationDescription: e.target.value,
+                })
               }}
             />
           </div>
@@ -71,18 +97,24 @@ export default function ChallengeInfo() {
                 onKeyUp={(e) => {
                   // 엔터 키 입력시 태그 추가
                   if (e.key === "Enter" && tag.trim() !== "") {
-                    setTags([...tags, tag])
                     setTag("")
+                    dispatch({
+                      type: "ADD_HASHTAG",
+                      hashtag: tag,
+                    })
                   }
                 }}
               />
             </div>
 
             <div className="absolute left-0 bottom-0 w-full overflow-x-scroll my-2 flex gap-1">
-              {tags.map((tag, index) => (
+              {challengeForm.hashtags.map((tag) => (
                 <Chip
                   onClose={() => {
-                    setTags(tags.filter((_, i) => i !== index))
+                    dispatch({
+                      type: "REMOVE_HASHTAG",
+                      hashtag: tag,
+                    })
                   }}
                   className="py-4"
                   variant="flat"
