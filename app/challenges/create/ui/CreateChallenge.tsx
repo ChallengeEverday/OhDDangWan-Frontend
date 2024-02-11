@@ -5,11 +5,13 @@ import {
 } from "@/app/utils/hooks/useCreateChallengeFormState"
 import { useFormStatus } from "@/app/utils/hooks/useFormStatus"
 import { post_challenges } from "@/app/utils/service/challenge"
-import { Button } from "@nextui-org/react"
+import { Button, Spinner } from "@nextui-org/react"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 export default function CreateChallenge() {
   const [challengeForm, dispatchChallengeForm] = useChallengeForm()
+  const [isLoading, setIsLoading] = useState(false)
   const [_, dispatchFormStatus] = useFormStatus()
   const router = useRouter()
 
@@ -19,6 +21,8 @@ export default function CreateChallenge() {
       console.log("챌린지 폼이 유효하지 않습니다!", { challengeForm })
       return
     }
+
+    setIsLoading(true)
 
     const postChallengeForm = {
       ...challengeForm,
@@ -31,12 +35,26 @@ export default function CreateChallenge() {
       dispatchChallengeForm({ type: "RESET_CHALLENGE" })
     } catch (error) {
       console.error(error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
   return (
-    <Button size="lg" onClick={createChallenge} variant="solid" color="primary">
-      챌린지 생성하기
-    </Button>
+    <>
+      <Button
+        size="lg"
+        onClick={createChallenge}
+        variant="solid"
+        color="primary"
+      >
+        챌린지 생성하기
+      </Button>
+      {isLoading && (
+        <div className="w-screen h-screen fixed top-0 left-0 bg-white/[.7] z-50 flex justify-center items-center">
+          <Spinner color="primary" size="lg" />
+        </div>
+      )}
+    </>
   )
 }
