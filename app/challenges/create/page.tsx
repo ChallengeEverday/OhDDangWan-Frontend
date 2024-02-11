@@ -5,6 +5,7 @@ import ChallengeInfo from "./ui/ChallengeInfo"
 import ChallengeDuration from "./ui/ChallengeDuration"
 import { ChallengeFormProvider } from "@/app/utils/hooks/useCreateChallengeFormState"
 import CreateChallenge from "./ui/CreateChallenge"
+import DebugChallenge from "./ui/DebugChallenge"
 
 export default function CreateChallengePage() {
   return (
@@ -25,6 +26,8 @@ export default function CreateChallengePage() {
         <section className="my-10">
           <CreateChallenge />
         </section>
+
+        <DebugChallenge />
       </main>
     </ChallengeFormProvider>
   )

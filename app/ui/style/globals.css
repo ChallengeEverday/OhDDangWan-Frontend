@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.string {
+  color: rgb(100, 221, 100);
+}
+.number {
+  color: rgb(250, 197, 132);
+}
+.boolean {
+  color: rgb(143, 143, 255);
+}
+.null {
+  color: rgb(250, 150, 250);
+}
+.key {
+  color: rgb(249, 175, 167);
+}
