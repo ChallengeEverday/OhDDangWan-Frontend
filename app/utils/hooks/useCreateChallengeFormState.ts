@@ -33,7 +33,6 @@ type ChallengeAction =
   | {
       type: "RESET_CHALLENGE_WEEKLY"
     }
-  | { type: "SET_OWNER_ID"; ownerId: ChallengeForm["ownerId"] }
   | {
       type: "SET_THUMBNAIL_IMAGE_URL"
       thumbnailImageUrl: ChallengeForm["thumbnailImageUrl"]
@@ -62,9 +61,6 @@ const reducer = (state: ChallengeForm, action: ChallengeAction) => {
       return { ...state, challengeStartTime: action.challengeStartTime }
     case "SET_CHALLENGE_END_TIME":
       return { ...state, challengeEndDate: action.challengeEndDate }
-    case "SET_OWNER_ID":
-      return { ...state, ownerId: action.ownerId }
-
     case "SET_THUMBNAIL_IMAGE_URL":
       return { ...state, thumbnailImageUrl: action.thumbnailImageUrl }
 
@@ -133,8 +129,6 @@ const initialState: ChallengeForm = {
   challengeEndDate: "",
   /** 챌린지 위클리 (ex. 금,토,일 => 0000111 => 7) */
   challengeWeekly: [false, false, false, false, false, false, false],
-  /** 방장 id */
-  ownerId: 0,
   /** 챌린지 이미지 url */
   thumbnailImageUrl: "",
   /** 챌린지 검색 해시태그 */
@@ -154,7 +148,6 @@ export const checkInvalid = (challengeForm: ChallengeForm) => {
     challengeCycle,
     challengeStartTime,
     challengeEndDate,
-    ownerId,
     challengeWeekly,
   } = challengeForm
 
@@ -165,7 +158,6 @@ export const checkInvalid = (challengeForm: ChallengeForm) => {
     !challengeCycle ||
     !challengeStartTime ||
     !challengeEndDate ||
-    !ownerId ||
     !challengeWeekly.some((day) => day)
   )
 }

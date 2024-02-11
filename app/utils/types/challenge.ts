@@ -21,8 +21,6 @@ export type ChallengeForm = {
     boolean,
     boolean,
   ]
-  /** 방장 id */
-  ownerId: POST_ChallengeForm["ownerId"]
   /** 챌린지 이미지 url */
   thumbnailImageUrl?: POST_ChallengeForm["thumbnailImageUrl"]
   /** 챌린지 검색 해시태그 */
@@ -44,8 +42,6 @@ export type POST_ChallengeForm = {
   challengeEndDate: string
   /** 챌린지 위클리 (ex. 금,토,일 => 0000111 => 7) */
   challengeWeekly: number
-  /** 방장 id */
-  ownerId: number
   /** 챌린지 이미지 url */
   thumbnailImageUrl?: string
   /** 챌린지 검색 해시태그 */
