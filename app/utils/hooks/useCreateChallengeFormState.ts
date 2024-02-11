@@ -19,6 +19,10 @@ type ChallengeAction =
       challengeStartTime: ChallengeForm["challengeStartTime"]
     }
   | {
+      type: "SET_CHALLENGE_END_TIME"
+      challengeEndDate: ChallengeForm["challengeEndDate"]
+    }
+  | {
       type: "ADD_CHALLENGE_WEEKLY"
       challengeWeekly: 요일
     }
@@ -56,6 +60,8 @@ const reducer = (state: ChallengeForm, action: ChallengeAction) => {
       return { ...state, challengeCycle: action.challengeCycle }
     case "SET_CHALLENGE_START_TIME":
       return { ...state, challengeStartTime: action.challengeStartTime }
+    case "SET_CHALLENGE_END_TIME":
+      return { ...state, challengeEndDate: action.challengeEndDate }
     case "SET_OWNER_ID":
       return { ...state, ownerId: action.ownerId }
 
@@ -123,6 +129,8 @@ const initialState: ChallengeForm = {
   challengeCycle: 0,
   /** 챌린지 시작 날짜 */
   challengeStartTime: "",
+  /** 챌린지 종료 날짜 */
+  challengeEndDate: "",
   /** 챌린지 위클리 (ex. 금,토,일 => 0000111 => 7) */
   challengeWeekly: [false, false, false, false, false, false, false],
   /** 방장 id */
@@ -137,3 +145,27 @@ export const [useChallengeForm, ChallengeFormProvider] = createReducerContext(
   reducer,
   initialState,
 )
+
+export const checkInvalid = (challengeForm: ChallengeForm) => {
+  const {
+    title,
+    description,
+    authenticationDescription,
+    challengeCycle,
+    challengeStartTime,
+    challengeEndDate,
+    ownerId,
+    challengeWeekly,
+  } = challengeForm
+
+  return (
+    !title ||
+    !description ||
+    !authenticationDescription ||
+    !challengeCycle ||
+    !challengeStartTime ||
+    !challengeEndDate ||
+    !ownerId ||
+    !challengeWeekly.some((day) => day)
+  )
+}

@@ -1,10 +1,12 @@
 import { useChallengeForm } from "@/app/utils/hooks/useCreateChallengeFormState"
+import { useFormStatus } from "@/app/utils/hooks/useFormStatus"
 import { Card, Chip, Divider, Image, Input, Textarea } from "@nextui-org/react"
 import { useRef, useState } from "react"
 import { LuUpload } from "react-icons/lu"
 
 export default function ChallengeInfo() {
   const [challengeForm, dispatch] = useChallengeForm()
+  const [formStatus] = useFormStatus()
 
   const [tag, setTag] = useState<string>("")
 
@@ -25,7 +27,6 @@ export default function ChallengeInfo() {
               type="text"
               variant="flat"
               label="챌린지 제목"
-              isRequired
               classNames={{
                 label: "font-bold text-base",
               }}
@@ -36,6 +37,8 @@ export default function ChallengeInfo() {
                   title: e.target.value,
                 })
               }}
+              isRequired
+              isInvalid={formStatus.isInvalid && !challengeForm.title}
             />
           </div>
           <div className="w-full">
@@ -43,6 +46,7 @@ export default function ChallengeInfo() {
               variant="bordered"
               label="챌린지 소개"
               isRequired
+              isInvalid={formStatus.isInvalid && !challengeForm.description}
               labelPlacement="outside"
               placeholder="예시) 매일 운동하고 인증해요! 헬스, 필라테스, 런닝, 홈트레이닝, 어떤 운동이든 함께 해봐요!"
               className="col-span-12 md:col-span-6"
@@ -75,6 +79,10 @@ export default function ChallengeInfo() {
                   authenticationDescription: e.target.value,
                 })
               }}
+              isRequired
+              isInvalid={
+                formStatus.isInvalid && !challengeForm.authenticationDescription
+              }
             />
           </div>
           <div className="w-full relative">

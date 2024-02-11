@@ -2,12 +2,14 @@ import { Divider, Input } from "@nextui-org/react"
 import { 요일별한글 } from "@/app/utils/dayjs"
 import dayjs from "dayjs"
 import { useChallengeForm } from "@/app/utils/hooks/useCreateChallengeFormState"
+import { useFormStatus } from "@/app/utils/hooks/useFormStatus"
 
 const AFTER_MIN_DAY = 3
 const MIN_DURATION = 7
 
 export default function ChallengeDuration() {
   const [challengeForm, dispatch] = useChallengeForm()
+  const [formStatus] = useFormStatus()
 
   const minStartDate = dayjs().add(AFTER_MIN_DAY, "day").format("YYYY-MM-DD")
   const minEndDate = dayjs()
@@ -26,7 +28,6 @@ export default function ChallengeDuration() {
             type="date"
             variant="flat"
             label="시작일"
-            isRequired
             classNames={{
               label: "font-bold text-base",
             }}
@@ -40,6 +41,12 @@ export default function ChallengeDuration() {
             }}
             name="challengeStartTime"
             min={minStartDate}
+            isRequired
+            isInvalid={
+              formStatus.isInvalid &&
+              !challengeForm.challengeStartTime &&
+              challengeForm.challengeStartTime < minStartDate
+            }
           />
         </section>
         <section className="w-full md:w-1/2">
@@ -49,11 +56,19 @@ export default function ChallengeDuration() {
             type="date"
             variant="flat"
             label="종료일"
-            isRequired
+            value={challengeForm.challengeEndDate}
+            onChange={(e) => {
+              dispatch({
+                type: "SET_CHALLENGE_END_TIME",
+                challengeEndDate: e.target.value,
+              })
+            }}
             classNames={{
               label: "font-bold text-base",
             }}
             min={minEndDate}
+            isRequired
+            isInvalid={formStatus.isInvalid && !challengeForm.challengeEndDate}
           />
         </section>
       </div>
