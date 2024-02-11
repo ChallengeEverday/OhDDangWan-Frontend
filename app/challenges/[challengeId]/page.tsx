@@ -1,4 +1,6 @@
 import ChallengeCalendar from "@/app/ui/ChallengeCalendar"
+import DebugLog from "@/app/ui/Debug/DebugLog"
+import { get_challenge_$challengeId } from "@/app/utils/service/challenge"
 import {
   Card,
   User,
@@ -11,7 +13,15 @@ import {
 } from "@nextui-org/react"
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io"
 
-export default function Page({ params }: { params: { challengeId: string } }) {
+export default async function Page({
+  params,
+  searchParams,
+}: {
+  params: { challengeId: string }
+  searchParams: any
+}) {
+  const result = await get_challenge_$challengeId(params.challengeId)
+
   const challenge = {
     title: "오운완 챌린지",
     time: "10분전 인증",
@@ -41,53 +51,54 @@ export default function Page({ params }: { params: { challengeId: string } }) {
   const events = [
     {
       id: 0,
-      title: '강희님 인증',
+      title: "강희님 인증",
       date: "2024-02-07",
     },
     {
       id: 1,
-      title: '진우님 인증',
+      title: "진우님 인증",
       date: "2024-02-08",
     },
     {
       id: 2,
-      title: '강희님 인증',
+      title: "강희님 인증",
       date: "2024-02-13",
     },
     {
       id: 22,
-      title: '진우님 인증',
+      title: "진우님 인증",
       date: "2024-02-13",
     },
     {
       id: 3,
-      title: '강희님 인증',
+      title: "강희님 인증",
       date: "2024-02-14",
     },
     {
       id: 4,
-      title: '진우님 인증',
+      title: "진우님 인증",
       date: "2024-02-14",
     },
     {
       id: 5,
-      title: '정우님 인증',
+      title: "정우님 인증",
       date: "2024-02-14",
     },
     {
       id: 6,
-      title: '혜인님 인증',
+      title: "혜인님 인증",
       date: "2024-02-14",
     },
     {
       id: 7,
-      title: '성진님 인증',
+      title: "성진님 인증",
       date: "2024-02-14",
     },
   ]
 
   return (
     <div className="relative">
+      <DebugLog object={result} modal={searchParams.modal} />
       <Chip
         variant="solid"
         color="primary"
