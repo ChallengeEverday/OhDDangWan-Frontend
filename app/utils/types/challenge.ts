@@ -5,14 +5,12 @@ export type ChallengeForm = {
   description: POST_ChallengeForm["description"]
   /** 챌린지 인증 방법 */
   authenticationDescription: POST_ChallengeForm["authenticationDescription"]
-  /** 챌린지 주기 */
-  challengeCycle: POST_ChallengeForm["challengeCycle"]
   /** 챌린지 시작 날짜 */
   challengeStartTime: POST_ChallengeForm["challengeStartTime"]
   /** 챌린지 종료 날짜 */
   challengeEndDate: POST_ChallengeForm["challengeEndDate"]
-  /** 챌린지 위클리 (ex. 금,토,일 => [true,0,0,0,0,true,true]) */
-  challengeWeekly: [
+  /** 챌린지 주기 (ex. 금,토,일 => [true,0,0,0,0,true,true]) */
+  challengeCycle: [
     boolean,
     boolean,
     boolean,
@@ -34,14 +32,12 @@ export type POST_ChallengeForm = {
   description: string
   /** 챌린지 인증 방법 */
   authenticationDescription: string
-  /** 챌린지 주기 */
-  challengeCycle: number
   /** 챌린지 시작 날짜 */
   challengeStartTime: string
   /** 챌린지 종료 날짜 */
   challengeEndDate: string
-  /** 챌린지 위클리 (ex. 금,토,일 => 0000111 => 7) */
-  challengeWeekly: number
+  /** 챌린지 주기 (ex. 금,토,일 => 0000111 => 7) */
+  challengeCycle: number
   /** 챌린지 이미지 url */
   thumbnailImageUrl?: string
   /** 챌린지 검색 해시태그 */
@@ -89,12 +85,10 @@ export type ChallengeMainResponseDto = {
 
   /** 챌린지 인증 방법 */
   authenticationDescription: string
-  /** 챌린지 주기 */
-  challengeCycle: number
   /** 챌린지 시작 날짜 */
   challengeStartTime: string
-  /** 챌린지 위클리 (ex. 금,토,일 => 0000111 => 7) */
-  challengeWeekly: number
+  /** 챌린지 주기 (ex. 금,토,일 => 0000111 => 7) */
+  challengeCycle: number
   /** 방장 id */
   ownerId: number
 }

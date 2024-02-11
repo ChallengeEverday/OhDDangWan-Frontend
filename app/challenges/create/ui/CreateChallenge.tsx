@@ -14,15 +14,17 @@ export default function CreateChallenge() {
   const createChallenge = async () => {
     if (checkInvalid(challengeForm)) {
       dispatchFormStatus({ type: "SET_IS_INVALID", isInvalid: true })
+      console.log("챌린지 폼이 유효하지 않습니다!", { challengeForm })
       return
     }
 
     const postChallengeForm = {
       ...challengeForm,
-      challengeWeekly: getDaysToBinarySum(challengeForm.challengeWeekly),
+      challengeCycle: getDaysToBinarySum(challengeForm.challengeCycle),
     }
     try {
-      await post_challenges(postChallengeForm)
+      const result = await post_challenges(postChallengeForm)
+      console.log("챌린지 생성 완료!", { result })
       dispatchChallengeForm({ type: "RESET_CHALLENGE" })
     } catch (error) {
       console.error(error)

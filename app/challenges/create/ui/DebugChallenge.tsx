@@ -1,3 +1,4 @@
+import { getDaysToBinarySum } from "@/app/utils/dayjs"
 import { useChallengeForm } from "@/app/utils/hooks/useCreateChallengeFormState"
 import { Button } from "@nextui-org/react"
 import { Tooltip } from "react-tooltip"
@@ -19,6 +20,9 @@ export default function DebugChallenge() {
             __html: syntaxHighlight(JSON.stringify(challengeForm, null, 2)),
           }}
         />
+        <pre>
+          challengeCycle: {getDaysToBinarySum(challengeForm.challengeCycle)}
+        </pre>
       </Tooltip>
     </>
   )

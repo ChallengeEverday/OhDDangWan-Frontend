@@ -11,10 +11,6 @@ type ChallengeAction =
       authenticationDescription: ChallengeForm["authenticationDescription"]
     }
   | {
-      type: "SET_CHALLENGE_CYCLE"
-      challengeCycle: ChallengeForm["challengeCycle"]
-    }
-  | {
       type: "SET_CHALLENGE_START_TIME"
       challengeStartTime: ChallengeForm["challengeStartTime"]
     }
@@ -24,11 +20,11 @@ type ChallengeAction =
     }
   | {
       type: "ADD_CHALLENGE_WEEKLY"
-      challengeWeekly: 요일
+      challengeCycle: 요일
     }
   | {
       type: "REMOVE_CHALLENGE_WEEKLY"
-      challengeWeekly: 요일
+      challengeCycle: 요일
     }
   | {
       type: "RESET_CHALLENGE_WEEKLY"
@@ -55,8 +51,6 @@ const reducer = (state: ChallengeForm, action: ChallengeAction) => {
         ...state,
         authenticationDescription: action.authenticationDescription,
       }
-    case "SET_CHALLENGE_CYCLE":
-      return { ...state, challengeCycle: action.challengeCycle }
     case "SET_CHALLENGE_START_TIME":
       return { ...state, challengeStartTime: action.challengeStartTime }
     case "SET_CHALLENGE_END_TIME":
@@ -66,27 +60,27 @@ const reducer = (state: ChallengeForm, action: ChallengeAction) => {
 
     // 챌린지 요일 주기
     case "ADD_CHALLENGE_WEEKLY": {
-      const challengeWeekly = state.challengeWeekly
-      challengeWeekly[요일별한글.indexOf(action.challengeWeekly)] = true
+      const challengeCycle = state.challengeCycle
+      challengeCycle[요일별한글.indexOf(action.challengeCycle)] = true
       return {
         ...state,
-        challengeWeekly,
+        challengeCycle,
       }
     }
 
     case "REMOVE_CHALLENGE_WEEKLY": {
-      const challengeWeekly = state.challengeWeekly
-      challengeWeekly[요일별한글.indexOf(action.challengeWeekly)] = false
+      const challengeCycle = state.challengeCycle
+      challengeCycle[요일별한글.indexOf(action.challengeCycle)] = false
       return {
         ...state,
-        challengeWeekly,
+        challengeCycle,
       }
     }
 
     case "RESET_CHALLENGE_WEEKLY":
       return {
         ...state,
-        challengeWeekly: initialState.challengeWeekly,
+        challengeCycle: initialState.challengeCycle,
       }
 
     // 해시태그
@@ -121,14 +115,12 @@ const initialState: ChallengeForm = {
   description: "",
   /** 챌린지 인증 방법 */
   authenticationDescription: "",
-  /** 챌린지 주기 */
-  challengeCycle: 0,
   /** 챌린지 시작 날짜 */
   challengeStartTime: "",
   /** 챌린지 종료 날짜 */
   challengeEndDate: "",
   /** 챌린지 위클리 (ex. 금,토,일 => 0000111 => 7) */
-  challengeWeekly: [false, false, false, false, false, false, false],
+  challengeCycle: [false, false, false, false, false, false, false],
   /** 챌린지 이미지 url */
   thumbnailImageUrl: "",
   /** 챌린지 검색 해시태그 */
@@ -145,19 +137,17 @@ export const checkInvalid = (challengeForm: ChallengeForm) => {
     title,
     description,
     authenticationDescription,
-    challengeCycle,
     challengeStartTime,
     challengeEndDate,
-    challengeWeekly,
+    challengeCycle,
   } = challengeForm
 
   return (
     !title ||
     !description ||
     !authenticationDescription ||
-    !challengeCycle ||
     !challengeStartTime ||
     !challengeEndDate ||
-    !challengeWeekly.some((day) => day)
+    !challengeCycle.some((day) => day)
   )
 }

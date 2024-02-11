@@ -9,14 +9,14 @@ export const 요일별한글: 요일[] = ["일", "월", "화", "수", "목", "�
 const nowDayjs = dayjs()
 
 export const getDaysToBinarySum = (
-  days: ChallengeForm["challengeWeekly"],
+  days: ChallengeForm["challengeCycle"],
 ): number => {
   // 월,화,수 === [false, true, true, true, false, false, false] => 1110000 => 56
   return days.reduce((acc, cur, i) => {
     if (!cur) return acc
 
-    if (i === 0) return Math.pow(2, 6)
-    return Math.pow(2, i - 1)
+    if (i === 0) return acc + Math.pow(2, 6)
+    return acc + Math.pow(2, i - 1)
   }, 0)
 }
 

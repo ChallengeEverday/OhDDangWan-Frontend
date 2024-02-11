@@ -79,19 +79,19 @@ export default function ChallengeDuration() {
             <DayButton
               key={요일}
               onClick={() => {
-                if (challengeForm.challengeWeekly[idx]) {
+                if (challengeForm.challengeCycle[idx]) {
                   dispatch({
                     type: "REMOVE_CHALLENGE_WEEKLY",
-                    challengeWeekly: 요일,
+                    challengeCycle: 요일,
                   })
                 } else {
                   dispatch({
                     type: "ADD_CHALLENGE_WEEKLY",
-                    challengeWeekly: 요일,
+                    challengeCycle: 요일,
                   })
                 }
               }}
-              selected={challengeForm.challengeWeekly[idx]}
+              selected={challengeForm.challengeCycle[idx]}
             >
               {요일}
             </DayButton>
