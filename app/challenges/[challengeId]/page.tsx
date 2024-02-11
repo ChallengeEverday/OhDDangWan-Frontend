@@ -20,33 +20,20 @@ export default async function Page({
   params: { challengeId: string }
   searchParams: any
 }) {
-  const result = await get_challenge_$challengeId(params.challengeId)
+  const challenge = await get_challenge_$challengeId(params.challengeId)
 
-  const challenge = {
-    title: "오운완 챌린지",
-    time: "10분전 인증",
-    description:
-      "맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 맨날 달리기 운동해요! 사진으로 인증해요. 마지막",
-    members: 120,
-    // image: "/running.avif",
-    image: "/hani1.jpg",
-    id: 1,
-    details: [
-      "매일",
-      "1년동안",
-      "11",
-      "ㅎㅎㅎㅎ",
-      "ㅁ[렁",
-      "으앙",
-      "시간이",
-      "간다",
-    ],
-    master: {
-      name: "팜하니",
-      avatar: "/hani1.jpg",
-    },
-    isLiked: false,
-  }
+  // const challenge = {
+  //   title: "테스트용 챌린지 생성해요",
+  //   description: "테스트 챌린지",
+  //   challengeCycle: 21,
+  //   challengeStartDate: "2024-02-14",
+  //   challengeEndDate: "2024-02-29",
+  //   ownerNickname: "강희(cherry.a)",
+  //   ownerProfileImageUrl:
+  //     "http://k.kakaocdn.net/dn/bRMpUE/btsD7mcKT32/dyRSblkw1iiw2JKbJCnfEk/img_640x640.jpg",
+  //   thumbnailImageUrl: "",
+  //   hashtags: ["오운완", "테스트"],
+  // }
 
   const events = [
     {
@@ -97,23 +84,26 @@ export default async function Page({
   ]
 
   return (
-    <div className="relative">
-      <DebugLog object={result} modal={searchParams.modal} />
-      <Chip
+    <div className="w-full relative">
+      <DebugLog object={challenge} modal={searchParams.modal} />
+      {/* <Chip
         variant="solid"
         color="primary"
         className="text-tiny py-2 m-3 absolute z-20 left-0"
       >
         {challenge.time}
-      </Chip>
+      </Chip> */}
       <div className="flex flex-col justify-center gap-5 relative md:flex-row">
-        <Image
-          aria-hidden
-          alt={challenge.title}
-          removeWrapper
-          className="aspect-[5/3] object-cover md:aspect-[4/3] md:w-1/2 w-full"
-          src={challenge.image}
-        />
+        {challenge.thumbnailImageUrl && (
+          <Image
+            aria-hidden
+            alt={challenge.title}
+            removeWrapper
+            className="aspect-[5/3] object-cover md:aspect-[4/3] md:w-1/2 w-full"
+            src={challenge.thumbnailImageUrl}
+            fallbackSrc="/running.avif"
+          />
+        )}
 
         <Card
           shadow="sm"
@@ -123,7 +113,7 @@ export default async function Page({
             <h2 className="font-bold text-xl md:text-2xl">{challenge.title}</h2>
             <div className="flex gap-1">
               <Button color="primary" variant="light" isIconOnly>
-                {challenge.isLiked ? (
+                {true ? (
                   <IoIosHeart size="24" />
                 ) : (
                   <IoIosHeartEmpty size="24" />
@@ -138,10 +128,10 @@ export default async function Page({
           <CardBody className="w-fullpt-3 md:max-h-80">
             <div>
               <User
-                name={challenge.master.name}
+                name={challenge.ownerNickname}
                 // description="Product Designer"
                 avatarProps={{
-                  src: challenge.master.avatar,
+                  src: challenge.ownerProfileImageUrl,
                 }}
               />
             </div>
@@ -149,10 +139,10 @@ export default async function Page({
           </CardBody>
 
           <div className="w-full select-none flex overflow-x-scroll p-4 z-10 absolute left-0 bottom-0">
-            {challenge.details &&
-              challenge.details.map((detail) => (
-                <Chip key={detail} variant="bordered" className="mr-1">
-                  #{detail}
+            {challenge.hashtags &&
+              challenge.hashtags.map((hashtag) => (
+                <Chip key={hashtag} variant="bordered" className="mr-1">
+                  #{hashtag}
                 </Chip>
               ))}
           </div>

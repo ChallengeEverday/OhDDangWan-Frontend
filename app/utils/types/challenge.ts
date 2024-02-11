@@ -92,3 +92,15 @@ export type ChallengeMainResponseDto = {
   /** 방장 id */
   ownerId: number
 }
+
+export type GET_ChallengeMainResponseDto = {
+  title: string
+  description: string
+  challengeCycle: number
+  challengeStartDate: string
+  challengeEndDate: string
+  ownerNickname: string
+  ownerProfileImageUrl: string
+  thumbnailImageUrl: string
+  hashtags: string[]
+}
