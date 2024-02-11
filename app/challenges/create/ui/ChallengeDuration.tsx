@@ -31,21 +31,21 @@ export default function ChallengeDuration() {
             classNames={{
               label: "font-bold text-base",
             }}
-            value={challengeForm.challengeStartTime}
+            value={challengeForm.challengeStartDate}
             onChange={(e) => {
               console.log(e.target.value)
               dispatch({
                 type: "SET_CHALLENGE_START_TIME",
-                challengeStartTime: e.target.value,
+                challengeStartDate: e.target.value,
               })
             }}
-            name="challengeStartTime"
+            name="challengeStartDate"
             min={minStartDate}
             isRequired
             isInvalid={
               formStatus.isInvalid &&
-              !challengeForm.challengeStartTime &&
-              challengeForm.challengeStartTime < minStartDate
+              !challengeForm.challengeStartDate &&
+              challengeForm.challengeStartDate < minStartDate
             }
           />
         </section>

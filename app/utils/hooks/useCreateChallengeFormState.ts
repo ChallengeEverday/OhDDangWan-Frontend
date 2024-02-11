@@ -12,7 +12,7 @@ type ChallengeAction =
     }
   | {
       type: "SET_CHALLENGE_START_TIME"
-      challengeStartTime: ChallengeForm["challengeStartTime"]
+      challengeStartDate: ChallengeForm["challengeStartDate"]
     }
   | {
       type: "SET_CHALLENGE_END_TIME"
@@ -52,7 +52,7 @@ const reducer = (state: ChallengeForm, action: ChallengeAction) => {
         authenticationDescription: action.authenticationDescription,
       }
     case "SET_CHALLENGE_START_TIME":
-      return { ...state, challengeStartTime: action.challengeStartTime }
+      return { ...state, challengeStartDate: action.challengeStartDate }
     case "SET_CHALLENGE_END_TIME":
       return { ...state, challengeEndDate: action.challengeEndDate }
     case "SET_THUMBNAIL_IMAGE_URL":
@@ -116,7 +116,7 @@ const initialState: ChallengeForm = {
   /** 챌린지 인증 방법 */
   authenticationDescription: "",
   /** 챌린지 시작 날짜 */
-  challengeStartTime: "",
+  challengeStartDate: "",
   /** 챌린지 종료 날짜 */
   challengeEndDate: "",
   /** 챌린지 위클리 (ex. 금,토,일 => 0000111 => 7) */
@@ -137,7 +137,7 @@ export const checkInvalid = (challengeForm: ChallengeForm) => {
     title,
     description,
     authenticationDescription,
-    challengeStartTime,
+    challengeStartDate,
     challengeEndDate,
     challengeCycle,
   } = challengeForm
@@ -146,7 +146,7 @@ export const checkInvalid = (challengeForm: ChallengeForm) => {
     !title ||
     !description ||
     !authenticationDescription ||
-    !challengeStartTime ||
+    !challengeStartDate ||
     !challengeEndDate ||
     !challengeCycle.some((day) => day)
   )
