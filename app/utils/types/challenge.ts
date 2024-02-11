@@ -9,6 +9,8 @@ export type ChallengeForm = {
   challengeCycle: POST_ChallengeForm["challengeCycle"]
   /** 챌린지 시작 날짜 */
   challengeStartTime: POST_ChallengeForm["challengeStartTime"]
+  /** 챌린지 종료 날짜 */
+  challengeEndDate: POST_ChallengeForm["challengeEndDate"]
   /** 챌린지 위클리 (ex. 금,토,일 => [true,0,0,0,0,true,true]) */
   challengeWeekly: [
     boolean,
@@ -38,6 +40,8 @@ export type POST_ChallengeForm = {
   challengeCycle: number
   /** 챌린지 시작 날짜 */
   challengeStartTime: string
+  /** 챌린지 종료 날짜 */
+  challengeEndDate: string
   /** 챌린지 위클리 (ex. 금,토,일 => 0000111 => 7) */
   challengeWeekly: number
   /** 방장 id */
