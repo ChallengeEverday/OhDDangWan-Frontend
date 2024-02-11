@@ -13,8 +13,6 @@ export default function ChallengeInfo() {
 
   return (
     <>
-      {JSON.stringify(challengeForm)}
-
       <h2 className="font-bold text-xl mt-2 md:text-2xl">챌린지 정보</h2>
       <Divider className="mt-1 mb-3 md:mb-6 md:mt-2" />
 
