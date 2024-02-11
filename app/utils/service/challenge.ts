@@ -17,7 +17,7 @@ export const get_challenge_$challengeId = async (id: string) => {
 
 export const post_challenges = async (challengeForm: POST_ChallengeForm) => {
   try {
-    const result = await api.post("/v1/challenges", challengeForm)
+    const result = await api.post<number>("/v1/challenges", challengeForm)
     return result
   } catch (e) {
     console.error(e)

@@ -6,10 +6,12 @@ import {
 import { useFormStatus } from "@/app/utils/hooks/useFormStatus"
 import { post_challenges } from "@/app/utils/service/challenge"
 import { Button } from "@nextui-org/react"
+import { useRouter } from "next/navigation"
 
 export default function CreateChallenge() {
   const [challengeForm, dispatchChallengeForm] = useChallengeForm()
   const [_, dispatchFormStatus] = useFormStatus()
+  const router = useRouter()
 
   const createChallenge = async () => {
     if (checkInvalid(challengeForm)) {
@@ -23,8 +25,9 @@ export default function CreateChallenge() {
       challengeCycle: getDaysToBinarySum(challengeForm.challengeCycle),
     }
     try {
-      const result = await post_challenges(postChallengeForm)
-      console.log("챌린지 생성 완료!", { result })
+      const { data } = await post_challenges(postChallengeForm)
+      router.push(`/challenges/${data}`)
+
       dispatchChallengeForm({ type: "RESET_CHALLENGE" })
     } catch (error) {
       console.error(error)
