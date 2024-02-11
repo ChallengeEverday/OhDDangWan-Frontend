@@ -19,8 +19,8 @@ export default function ChallengeDuration() {
   return (
     <>
       <h2 className="font-bold text-xl mt-6 md:text-2xl">챌린지 기간</h2>
-      <Divider className="mt-1 mb-3 md:mb-6 md:mt-2" />
-      <div className="flex flex-col md:flex-row gap-2 md:gap-5">
+      <Divider className="mb-6 mt-1 md:mt-2" />
+      <div className="flex flex-col md:flex-row gap-6 md:gap-5">
         <section className="w-full md:w-1/2">
           <Input
             labelPlacement="outside"

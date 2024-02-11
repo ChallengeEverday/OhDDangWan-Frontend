@@ -16,7 +16,7 @@ export default function ChallengeInfo() {
   return (
     <>
       <h2 className="font-bold text-xl mt-2 md:text-2xl">챌린지 정보</h2>
-      <Divider className="mt-1 mb-3 md:mb-6 md:mt-2" />
+      <Divider className="mb-6 mt-1 md:mt-2" />
 
       <div className="flex flex-col md:flex-row gap-2 md:gap-5">
         <section className="flex grow-0 md:w-1/2 flex-col justify-start items-center gap-4 md:gap-6">
@@ -86,7 +86,7 @@ export default function ChallengeInfo() {
             />
           </div>
           <div className="w-full relative">
-            <div className="pb-6">
+            <div className="pb-12">
               <Input
                 labelPlacement="outside"
                 placeholder="#오운완 #오공완"
