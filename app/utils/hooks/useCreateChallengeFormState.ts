@@ -30,8 +30,8 @@ type ChallengeAction =
       type: "RESET_CHALLENGE_WEEKLY"
     }
   | {
-      type: "SET_THUMBNAIL_IMAGE_URL"
-      thumbnailImageUrl: ChallengeForm["thumbnailImageUrl"]
+      type: "SET_THUMBNAIL_IMAGE"
+      thumbnailImage: File
     }
   | { type: "ADD_HASHTAG"; hashtag: string }
   | { type: "REMOVE_HASHTAG"; hashtag: string }
@@ -55,8 +55,8 @@ const reducer = (state: ChallengeForm, action: ChallengeAction) => {
       return { ...state, challengeStartDate: action.challengeStartDate }
     case "SET_CHALLENGE_END_TIME":
       return { ...state, challengeEndDate: action.challengeEndDate }
-    case "SET_THUMBNAIL_IMAGE_URL":
-      return { ...state, thumbnailImageUrl: action.thumbnailImageUrl }
+    case "SET_THUMBNAIL_IMAGE":
+      return { ...state, thumbnailImage: action.thumbnailImage }
 
     // 챌린지 요일 주기
     case "ADD_CHALLENGE_WEEKLY": {
@@ -121,8 +121,6 @@ const initialState: ChallengeForm = {
   challengeEndDate: "",
   /** 챌린지 위클리 (ex. 금,토,일 => 0000111 => 7) */
   challengeCycle: [false, false, false, false, false, false, false],
-  /** 챌린지 이미지 url */
-  thumbnailImageUrl: "",
   /** 챌린지 검색 해시태그 */
   hashtags: [],
 }

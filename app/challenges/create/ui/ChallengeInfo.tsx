@@ -147,7 +147,10 @@ export default function ChallengeInfo() {
               onChange={(e) => {
                 if (!e.target.files) return
                 setPhoto(e.target.files[0])
-                console.log(e.target.files[0])
+                dispatch({
+                  type: "SET_THUMBNAIL_IMAGE",
+                  thumbnailImage: e.target.files[0],
+                })
               }}
             />
             <button

@@ -20,7 +20,7 @@ export type ChallengeForm = {
     boolean,
   ]
   /** 챌린지 이미지 url */
-  thumbnailImageUrl?: POST_ChallengeForm["thumbnailImageUrl"]
+  thumbnailImage?: File
   /** 챌린지 검색 해시태그 */
   hashtags: POST_ChallengeForm["hashtags"]
 }

@@ -5,6 +5,7 @@ import {
 } from "@/app/utils/hooks/useCreateChallengeFormState"
 import { useFormStatus } from "@/app/utils/hooks/useFormStatus"
 import { post_challenges } from "@/app/utils/service/challenge"
+import { uploadFileS3 } from "@/app/utils/service/s3"
 import { Button, Spinner } from "@nextui-org/react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -24,8 +25,26 @@ export default function CreateChallenge() {
 
     setIsLoading(true)
 
+    const thumbnailImageInfo = async (thumbnailImage: File) => {
+      const thumbnailImageUrl = await uploadFileS3(thumbnailImage)
+
+      return {
+        thumbnailImage: null,
+        thumbnailImageUrl,
+      }
+    }
+
+    // s3 이미지 업로드
+    if (challengeForm.thumbnailImage) {
+      const result = await uploadFileS3(challengeForm.thumbnailImage)
+      console.log({ result })
+    }
+
     const postChallengeForm = {
       ...challengeForm,
+      ...(challengeForm.thumbnailImage
+        ? await thumbnailImageInfo(challengeForm.thumbnailImage)
+        : {}),
       challengeCycle: getDaysToBinarySum(challengeForm.challengeCycle),
     }
     try {
