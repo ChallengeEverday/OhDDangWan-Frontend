@@ -15,6 +15,11 @@ export default function Editor({ content }: EditorProps) {
   const editor = useEditor({
     extensions: [StarterKit, Highlight, Typography],
     content,
+    onUpdate: ({ editor }) => {
+      const json = editor.getJSON()
+      console.log(json)
+      // send the content to an API here
+    },
   })
 
   return <EditorContent className={styles.tiptap} editor={editor} />
