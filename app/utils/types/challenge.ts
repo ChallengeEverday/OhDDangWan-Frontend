@@ -81,7 +81,7 @@ export type ChallengeMainResponseDto = {
   /** 최신 인증 날짜 및 시간 */
   authenticationDateTime: string
   /** 챌린지 검색 해시태그 */
-  hashtags: HastagDto[]
+  hashtags: string[]
 
   /** 챌린지 인증 방법 */
   authenticationDescription: string
@@ -119,5 +119,6 @@ export type Pagenation<R> = {
     totalPageCount: number
     size: number
     lastId: string
+    currentPageNumber: number
   }
 }
