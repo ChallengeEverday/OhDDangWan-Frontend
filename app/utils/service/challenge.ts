@@ -1,10 +1,36 @@
 import {
+  ChallengeMainResponseDto,
   GET_ChallengeMainResponseDto,
+  GET_params_challenges,
   POST_ChallengeForm,
+  Pagenation,
 } from "../types/challenge"
 import api from "./api"
 
-export const get_challenges = async (id: string) => {}
+export const get_challenges = async (params?: GET_params_challenges) => {
+  try {
+    const paramsDefault = {
+      page: 0,
+      limit: 10,
+      sort: "desc",
+      sortKey: "created_at",
+      ...params,
+    }
+
+    const queryString = new URLSearchParams(paramsDefault).toString()
+
+    const result = await api.get<Pagenation<ChallengeMainResponseDto[]>>(
+      `/v1/challenges?${queryString}`,
+    )
+
+    return result
+  } catch (e) {
+    console.error(e)
+    throw new Error(
+      `챌린지를 불러오는데 실패하였습니다. get /v1/challenges?${queryString}}`,
+    )
+  }
+}
 
 export const get_challenge_$challengeId = async (id: string) => {
   try {

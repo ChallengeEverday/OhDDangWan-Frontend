@@ -104,3 +104,20 @@ export type GET_ChallengeMainResponseDto = {
   thumbnailImageUrl: string
   hashtags: string[]
 }
+
+export type GET_params_challenges = {
+  page?: number
+  size?: number
+  sortColumn?: "CREATED_AT" | "LIKE_COUNT"
+  sortOrder?: "ASC" | "DESC"
+}
+
+export type Pagenation<R> = {
+  result: R
+  metadata: {
+    totalCount: number
+    totalPageCount: number
+    size: number
+    lastId: string
+  }
+}
