@@ -11,7 +11,7 @@ export const get_challenges = async (params?: GET_params_challenges) => {
   try {
     const paramsDefault = {
       page: 0,
-      limit: 10,
+      size: 12,
       sort: "desc",
       sortKey: "created_at",
       ...params,
