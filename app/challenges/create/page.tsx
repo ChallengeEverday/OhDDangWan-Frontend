@@ -7,13 +7,15 @@ import { ChallengeFormProvider } from "@/app/utils/hooks/useCreateChallengeFormS
 import CreateChallenge from "./ui/CreateChallenge"
 import DebugChallenge from "./ui/DebugChallenge"
 import { FormStatusProvider } from "@/app/utils/hooks/useFormStatus"
+import Editor from "@/app/ui/Editor/Editor"
 
 export default function CreateChallengePage() {
   return (
     <ChallengeFormProvider>
       <FormStatusProvider>
         <main className="w-full">
-          <section className="w-full bg-red-50 h-40">
+          <section className="w-full min-h-40">
+            <Editor />
             <Notification />
           </section>
 
