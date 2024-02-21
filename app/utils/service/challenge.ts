@@ -8,17 +8,17 @@ import {
 import api from "./api"
 
 export const get_challenges = async (params?: GET_params_challenges) => {
+  const paramsDefault = {
+    page: 0,
+    size: 12,
+    sort: "desc",
+    sortKey: "created_at",
+    ...params,
+  }
+
+  const queryString = new URLSearchParams(paramsDefault as any).toString()
+
   try {
-    const paramsDefault = {
-      page: 0,
-      size: 12,
-      sort: "desc",
-      sortKey: "created_at",
-      ...params,
-    }
-
-    const queryString = new URLSearchParams(paramsDefault).toString()
-
     const result = await api.get<Pagenation<ChallengeMainResponseDto[]>>(
       `/v1/challenges?${queryString}`,
     )
