@@ -15,6 +15,11 @@ export default function Editor({ content }: EditorProps) {
   const editor = useEditor({
     extensions: [StarterKit, Highlight, Typography],
     content,
+    editorProps: {
+      attributes: {
+        class: 'focus:outline-none',
+      },
+    },
     onUpdate: ({ editor }) => {
       const json = editor.getJSON()
       console.log(json)
