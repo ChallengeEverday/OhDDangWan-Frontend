@@ -1,3 +1,4 @@
+import Editor from "@/app/ui/Editor/Editor"
 import { useChallengeForm } from "@/app/utils/hooks/useCreateChallengeFormState"
 import { useFormStatus } from "@/app/utils/hooks/useFormStatus"
 import { Card, Chip, Divider, Image, Input, Textarea } from "@nextui-org/react"
@@ -42,47 +43,33 @@ export default function ChallengeInfo() {
             />
           </div>
           <div className="w-full">
-            <Textarea
-              variant="bordered"
-              label="챌린지 소개"
-              isRequired
-              isInvalid={formStatus.isInvalid && !challengeForm.description}
-              labelPlacement="outside"
-              placeholder="예시) 매일 운동하고 인증해요! 헬스, 필라테스, 런닝, 홈트레이닝, 어떤 운동이든 함께 해봐요!"
-              className="col-span-12 md:col-span-6"
-              classNames={{
-                label: "font-bold text-base",
-              }}
-              value={challengeForm.description}
-              onChange={(e) => {
+            <h2 className="mb-1 font-bold text-base">챌린지 소개</h2>
+            {/* placeholder="예시) 매일 운동하고 인증해요! 헬스, 필라테스, 런닝, 홈트레이닝, 어떤 운동이든 함께 해봐요!" */}
+            {/* isInvalid={formStatus.isInvalid && !challengeForm.description} */}
+            <Editor
+              content={challengeForm.description}
+              setContent={(content) => {
                 dispatch({
                   type: "SET_DESCRIPTION",
-                  description: e.target.value,
+                  description: content,
                 })
               }}
             />
           </div>
           <div className="w-full">
-            <Textarea
-              variant="bordered"
-              label="챌린지 인증 방법"
-              labelPlacement="outside"
-              placeholder="예시) 매주 월, 수, 금 마다 운동한 사진을 인증해주세요!"
-              className="col-span-12 md:col-span-6"
-              classNames={{
-                label: "font-bold text-base",
-              }}
-              value={challengeForm.authenticationDescription}
-              onChange={(e) => {
+            <h2 className="mb-1 font-bold text-base">챌린지 인증 방법</h2>
+            {/* placeholder="예시) 매주 월, 수, 금 마다 운동한 사진을 인증해주세요!" */}
+            {/* isInvalid={
+                formStatus.isInvalid && !challengeForm.authenticationDescription
+              } */}
+            <Editor
+              content={challengeForm.authenticationDescription}
+              setContent={(content) => {
                 dispatch({
                   type: "SET_AUTHENTICATION_DESCRIPTION",
-                  authenticationDescription: e.target.value,
+                  authenticationDescription: content,
                 })
               }}
-              isRequired
-              isInvalid={
-                formStatus.isInvalid && !challengeForm.authenticationDescription
-              }
             />
           </div>
           <div className="w-full relative">
