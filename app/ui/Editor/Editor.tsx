@@ -8,24 +8,26 @@ import React from "react"
 
 type EditorProps = {
   content?: string
-  onChange?: (content: string) => void
+  setContent?: (content: string) => void
 }
 
-export default function Editor({ content }: EditorProps) {
+export default function Editor({ content, setContent }: EditorProps) {
   const editor = useEditor({
     extensions: [StarterKit, Highlight, Typography],
     content,
     editorProps: {
       attributes: {
-        class: 'focus:outline-none',
+        class: 'focus:outline-none p-4 w-full min-h-36 max-h-80 ',
       },
     },
     onUpdate: ({ editor }) => {
       const json = editor.getJSON()
+      setContent?.(JSON.stringify(json))
       console.log(json)
-      // send the content to an API here
     },
   })
 
-  return <EditorContent className={styles.tiptap} editor={editor} />
+  const classNames = `${styles.tiptap} focus:outline-none bg-default-100 rounded-md p-4 w-full min-h-36 max-h-80 overflow-y-auto`
+
+  return <EditorContent className={classNames} editor={editor} />
 }

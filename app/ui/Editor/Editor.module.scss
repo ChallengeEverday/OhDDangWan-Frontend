@@ -1,9 +1,11 @@
 .tiptap {
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 1rem;
-  user-select: none;
-  outline: none;
+  // border: 1px solid #e2e8f0;
+  // border-radius: 10px;
+  // padding: 1rem;
+  // min-height: 100px;
+  // max-height: 300px;
+  // overflow: scroll;
+  font-size: 0.8rem;
 
   > * + * {
     margin-top: 0.75em;
@@ -15,27 +17,15 @@
   }
 
   h1 {
-    font-size: 2.25rem;
-  }
-
-  h2 {
-    font-size: 2rem;
-  }
-
-  h3 {
-    font-size: 1.75rem;
-  }
-
-  h4 {
     font-size: 1.5rem;
   }
 
-  h5 {
+  h2 {
     font-size: 1.25rem;
   }
 
-  h6 {
-    font-size: 1rem;
+  h3 {
+    font-size: 1.15rem;
   }
 
   h1,
@@ -46,7 +36,7 @@
   h6 {
     line-height: 1.1;
     font-weight: 700;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
   }
 
   code {
