@@ -24,7 +24,7 @@ const createUserInfoStore: ZustandUserInfoStore = (set) => ({
 export const useUserInfoStore = create(
   persist(createUserInfoStore, {
     name: "userInfo",
-    storage: createJSONStorage(() => sessionStorage), // (optional) by default, 'localStorage' is used
+    storage: createJSONStorage(() => localStorage), // (optional) by default, 'localStorage' is used
   }),
 )
 
