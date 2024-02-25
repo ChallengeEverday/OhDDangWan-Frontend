@@ -1,4 +1,6 @@
-import styles from "./Editor.module.scss"
+"use client"
+
+import editorStyles from "./Editor.module.scss"
 
 import Highlight from "@tiptap/extension-highlight"
 import Typography from "@tiptap/extension-typography"
@@ -11,8 +13,9 @@ type EditorProps = {
   setContent?: (content: string) => void
 }
 
-export default function Editor({ content, setContent }: EditorProps) {
+export default function Markdown({ content, setContent }: EditorProps) {
   const editor = useEditor({
+    editable: false,
     extensions: [StarterKit, Highlight, Typography],
     content,
     editorProps: {
@@ -27,7 +30,7 @@ export default function Editor({ content, setContent }: EditorProps) {
     },
   })
 
-  const classNames = `${styles.tiptap} focus:outline-none bg-default-100 rounded-md p-4 w-full min-h-36 max-h-80 overflow-y-auto`
+  const classNames = `${editorStyles.tiptap} focus:outline-none w-full`
 
   return <EditorContent className={classNames} editor={editor} />
 }

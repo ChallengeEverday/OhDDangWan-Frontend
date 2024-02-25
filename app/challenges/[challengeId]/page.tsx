@@ -1,5 +1,6 @@
 import ChallengeCalendar from "@/app/ui/ChallengeCalendar"
 import DebugLog from "@/app/ui/Debug/DebugLog"
+import Markdown from "@/app/ui/Editor/Markdown"
 import { get_challenge_$challengeId } from "@/app/utils/service/challenge"
 import {
   Card,
@@ -83,6 +84,11 @@ export default async function Page({
     },
   ]
 
+  const isMarkdown = challenge.description.startsWith("{")
+  const description = isMarkdown
+    ? JSON.parse(challenge.description)
+    : challenge.description
+
   return (
     <div className="w-full relative">
       <DebugLog object={challenge} modal={searchParams.modal} />
@@ -129,13 +135,16 @@ export default async function Page({
             <div>
               <User
                 name={challenge.ownerNickname}
-                // description="Product Designer"
                 avatarProps={{
                   src: challenge.ownerProfileImageUrl,
                 }}
               />
             </div>
-            <p>{challenge.description}</p>
+            {isMarkdown ? (
+              <Markdown content={description} />
+            ) : (
+              <p>{description}</p>
+            )}
           </CardBody>
 
           <div className="w-full select-none flex overflow-x-scroll p-4 z-10 absolute left-0 bottom-0">

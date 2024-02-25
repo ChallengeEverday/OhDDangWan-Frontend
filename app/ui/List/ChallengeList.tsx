@@ -91,10 +91,10 @@ export default function ChallengeList() {
                           </p>
                         </div>
                       </div>
-                      <Divider />
-                      <div className="w-full pt-3 truncate">
+                      {/* <Divider /> */}
+                      {/* <div className="w-full pt-3 truncate">
                         <p className="truncate">{description}</p>
-                      </div>
+                      </div> */}
                       <div className="w-full select-none flex overflow-x-scroll pt-3">
                         {hashtags &&
                           hashtags.map((tag) => (
