@@ -3,18 +3,19 @@
 import {
   delete_comments_$commentId,
   get_comments_$challengeId,
-  put_comments_$commentId,
   queryKey_comments_$challengeId,
 } from "@/app/utils/service/comments"
 import { useUserInfoStore } from "@/app/utils/store/userInfoStore"
 import { Button, Divider, User } from "@nextui-org/react"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { useParams } from "next/navigation"
-import React from "react"
+import React, { useState } from "react"
+import { CommentUpdateInput } from "./CommentUpdateInput"
 
 export function CommentList() {
   const params = useParams()
-  const userInfo = useUserInfoStore((state) => state.userInfo)
+  const myInfo = useUserInfoStore((state) => state.userInfo)
+  const [editCommentId, setEditCommentId] = useState(-1)
 
   const getComments = async (pageParam: number) => {
     const { data } = await get_comments_$challengeId(
@@ -45,10 +46,6 @@ export function CommentList() {
       },
     })
 
-  const putComment = async (commentId: number, content: string) => {
-    put_comments_$commentId(commentId, content)
-  }
-
   const deleteComment = async (commentId: number) => {
     await delete_comments_$commentId(commentId)
   }
@@ -64,34 +61,23 @@ export function CommentList() {
         <React.Fragment key={metadata.currentPageNumber}>
           {result.map(({ commentId, parentId, userId, content, children }) => (
             <li className="w-full" key={commentId}>
-              <div className="w-full flex flex-col justify-start items-start gap-2 p-3">
-                <div className="flex w-full justify-between items-center">
-                  <User
-                    name={"이름"}
-                    avatarProps={
-                      {
-                        // src: challenge.ownerProfileImageUrl,
-                      }
-                    }
-                  />
-                  {userInfo?.userId !== userId ? (
-                    <div className="flex h-5 items-center space-x-4 text-small">
-                      <button className="text-foreground-400">수정</button>
-                      <Divider orientation="vertical" />
-                      <button
-                        onClick={async () => {
-                          await deleteComment(commentId)
-                          refetch()
-                        }}
-                        className="text-primary-400"
-                      >
-                        삭제
-                      </button>
-                    </div>
-                  ) : null}
-                </div>
-                {content}
-              </div>
+              {editCommentId === commentId ? (
+                <CommentUpdateInput
+                  finishEdit={() => setEditCommentId(-1)}
+                  commentId={commentId}
+                  content={content}
+                />
+              ) : (
+                <Comment
+                  commentId={commentId}
+                  userId={userId}
+                  content={content}
+                  deleteComment={deleteComment}
+                  refetch={refetch}
+                  myInfo={myInfo}
+                  setEditCommentId={setEditCommentId}
+                />
+              )}
               <Divider />
             </li>
           ))}
@@ -109,5 +95,53 @@ export function CommentList() {
         </div>
       ) : null}
     </ul>
+  )
+}
+
+function Comment({
+  commentId,
+  myInfo,
+  userId,
+  content,
+  deleteComment,
+  refetch,
+  setEditCommentId,
+}: any) {
+  return (
+    <div className="w-full flex flex-col justify-start items-start gap-2 p-3">
+      <div className="flex w-full justify-between items-center">
+        <User
+          name={"이름"}
+          avatarProps={
+            {
+              // src: challenge.ownerProfileImageUrl,
+            }
+          }
+        />
+        {myInfo?.userId !== userId ? (
+          <div className="flex h-5 items-center space-x-4 text-small">
+            <button
+              onClick={() => {
+                setEditCommentId(commentId)
+              }}
+              className="text-foreground-400"
+            >
+              수정
+            </button>
+            <Divider orientation="vertical" />
+            <button
+              onClick={async () => {
+                await deleteComment(commentId)
+                refetch()
+              }}
+              className="text-primary-400"
+            >
+              삭제
+            </button>
+          </div>
+        ) : null}
+      </div>
+      {content}
+    </div>
   )
 }
