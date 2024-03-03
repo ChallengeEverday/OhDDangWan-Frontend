@@ -32,8 +32,9 @@ export function CommentList() {
       initialPageParam: 0,
       getNextPageParam: (lastPage) => {
         if (
+          lastPage.metadata.totalPageCount === 0 ||
           lastPage.metadata.currentPageNumber ===
-          lastPage.metadata.totalPageCount - 1
+            lastPage.metadata.totalPageCount - 1
         )
           return null
         return lastPage.metadata.currentPageNumber + 1
@@ -54,6 +55,11 @@ export function CommentList() {
 
   return (
     <ul>
+      {data?.pages[0].result.length === 0 ? (
+        <div className="w-full text-foreground-400 p-5 text-center">
+          댓글이 없습니다.
+        </div>
+      ) : null}
       {data?.pages.map(({ result, metadata }) => (
         <React.Fragment key={metadata.currentPageNumber}>
           {result.map(({ commentId, parentId, userId, content, children }) => (
