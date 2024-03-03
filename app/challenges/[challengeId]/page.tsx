@@ -15,6 +15,7 @@ import {
 } from "@nextui-org/react"
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io"
 import { CommentInput } from "./components/CommentInput"
+import { CommentList } from "./components/CommentList"
 
 export default async function Page({
   params,
@@ -101,6 +102,7 @@ export default async function Page({
 
       <section className="my-10 w-full">
         <CommentInput />
+        <CommentList />
       </section>
 
       {/*

@@ -1,3 +1,4 @@
+import { String } from "aws-sdk/clients/acm"
 import { Pagenation } from "../types/challenge"
 import {
   CommentResponseDto,
@@ -5,14 +6,27 @@ import {
   POST_params_comments,
 } from "../types/comments"
 import api from "./api"
+import { queryClient } from "./query"
+
+export const queryKey_comments_$challengeId = (challengeId: String) => [
+  "challenges",
+  challengeId,
+  "comments",
+]
+
+export const refetch_comments_$challengeId = async (challengeId: String) => {
+  await queryClient.refetchQueries({
+    queryKey: queryKey_comments_$challengeId(challengeId),
+  })
+}
 
 export const get_comments_$challengeId = async (
-  challengeId: number,
+  challengeId: string,
   params?: GET_params_comments,
 ) => {
   const paramsDefault = {
     page: 0,
-    size: 10,
+    size: 5,
     ...params,
   }
 
@@ -51,7 +65,7 @@ export const post_comments_$challengeId = async (
   }
 }
 
-export const pust_comments_$commentId = async (
+export const put_comments_$commentId = async (
   commentId: number,
   content: string,
 ) => {
