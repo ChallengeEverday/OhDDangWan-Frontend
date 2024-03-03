@@ -14,6 +14,7 @@ import {
   Button,
 } from "@nextui-org/react"
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io"
+import { CommentInput } from "./components/CommentInput"
 
 export default async function Page({
   params,
@@ -98,7 +99,12 @@ export default async function Page({
         </Card>
       </div>
 
-      {/* <section className="my-10 w-full">
+      <section className="my-10 w-full">
+        <CommentInput />
+      </section>
+
+      {/*
+      <section className="my-10 w-full">
         <ChallengeCalendar events={calendarEvents} />
       </section> 
       */}

@@ -1,5 +1,9 @@
 import { Pagenation } from "../types/challenge"
-import { CommentResponseDto, GET_params_comments } from "../types/comments"
+import {
+  CommentResponseDto,
+  GET_params_comments,
+  POST_params_comments,
+} from "../types/comments"
 import api from "./api"
 
 export const get_comments_$challengeId = async (
@@ -29,17 +33,13 @@ export const get_comments_$challengeId = async (
 }
 
 export const post_comments_$challengeId = async (
-  challengeId: number,
-  parentId: number,
-  content: string,
+  challengeId: string,
+  params: POST_params_comments,
 ) => {
   try {
     const result = await api.post<CommentResponseDto>(
       `/v1/comments/${challengeId}`,
-      {
-        content,
-        parentId,
-      },
+      params,
     )
 
     return result
