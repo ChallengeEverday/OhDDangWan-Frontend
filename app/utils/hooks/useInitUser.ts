@@ -9,7 +9,9 @@ export const useInitUser = () => {
 
   useAsync(async () => {
     const { data } = await get_user_myProfile()
-    if (!userInfo && data) setUserInfo(data)
-    else if (userInfo && !data) removeUserInfo()
+    if (!userInfo && data) {
+      setUserInfo(data)
+    } else if (userInfo && !data) removeUserInfo()
+    if (userInfo && !data) removeUserInfo()
   }, [])
 }

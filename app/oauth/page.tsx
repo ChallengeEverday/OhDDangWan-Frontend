@@ -7,12 +7,14 @@ import { useEffect } from "react"
 import { post_oauth_login } from "../utils/service/auth"
 import { get_user_myProfile } from "../utils/service/account"
 import { useUserInfoStore } from "../utils/store/userInfoStore"
+import { useTimer } from "../utils/hooks/useTimer"
 
 export default function Oauth() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const code = searchParams.get("code")
   const setUserInfo = useUserInfoStore((state) => state.setUserInfo)
+  const removeUserInfo = useUserInfoStore((state) => state.removeUserInfo)
 
   const getPayload = () =>
     QueryString.stringify({
@@ -37,6 +39,15 @@ export default function Oauth() {
     }
   }
 
+  // 1시간 뒤에 유저 정보 삭제
+  const [start] = useTimer(
+    () => {
+      removeUserInfo()
+      console.log("유저 정보 삭제됨")
+    },
+    1000 * 60 * 60,
+  )
+
   const getToken = async () => {
     try {
       const accessToken = await getKakaoAccessToken(getPayload())
@@ -48,6 +59,7 @@ export default function Oauth() {
         // 유저 정보 가져오기
         const userInfo = await get_user_myProfile()
         setUserInfo(userInfo.data)
+        start()
       }
     } catch (err) {
       console.error(err)
