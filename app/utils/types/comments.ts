@@ -12,6 +12,6 @@ export type CommentResponseDto = {
   commentId: 0
   parentId: 0
   userId: 0
-  content: string[]
+  content: string
   children: string[]
 }
