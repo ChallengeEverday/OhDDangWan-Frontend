@@ -11,11 +11,11 @@ api.interceptors.response.use(
     return response
   },
   (error) => {
-    if (error.response.status === 403) {
-      window.location.href = "/login"
-      useUserInfoStore.getState().removeUserInfo()
-    }
-    return Promise.reject(error)
+    // if (error.response.status === 403) {
+    //   window.location.href = "/login"
+    //   useUserInfoStore.getState().removeUserInfo()
+    // }
+    // return Promise.reject(error)
   },
 )
 
