@@ -1,6 +1,7 @@
 import ChallengeCalendar from "@/app/ui/ChallengeCalendar"
 import DebugLog from "@/app/ui/Debug/DebugLog"
 import Markdown from "@/app/ui/Editor/Markdown"
+import { calendarEvents } from "@/app/utils/data/mock"
 import { get_challenge_$challengeId } from "@/app/utils/service/challenge"
 import {
   Card,
@@ -22,67 +23,6 @@ export default async function Page({
   searchParams: any
 }) {
   const challenge = await get_challenge_$challengeId(params.challengeId)
-
-  // const challenge = {
-  //   title: "테스트용 챌린지 생성해요",
-  //   description: "테스트 챌린지",
-  //   challengeCycle: 21,
-  //   challengeStartDate: "2024-02-14",
-  //   challengeEndDate: "2024-02-29",
-  //   ownerNickname: "강희(cherry.a)",
-  //   ownerProfileImageUrl:
-  //     "http://k.kakaocdn.net/dn/bRMpUE/btsD7mcKT32/dyRSblkw1iiw2JKbJCnfEk/img_640x640.jpg",
-  //   thumbnailImageUrl: "",
-  //   hashtags: ["오운완", "테스트"],
-  // }
-
-  const events = [
-    {
-      id: 0,
-      title: "강희님 인증",
-      date: "2024-02-07",
-    },
-    {
-      id: 1,
-      title: "진우님 인증",
-      date: "2024-02-08",
-    },
-    {
-      id: 2,
-      title: "강희님 인증",
-      date: "2024-02-13",
-    },
-    {
-      id: 22,
-      title: "진우님 인증",
-      date: "2024-02-13",
-    },
-    {
-      id: 3,
-      title: "강희님 인증",
-      date: "2024-02-14",
-    },
-    {
-      id: 4,
-      title: "진우님 인증",
-      date: "2024-02-14",
-    },
-    {
-      id: 5,
-      title: "정우님 인증",
-      date: "2024-02-14",
-    },
-    {
-      id: 6,
-      title: "혜인님 인증",
-      date: "2024-02-14",
-    },
-    {
-      id: 7,
-      title: "성진님 인증",
-      date: "2024-02-14",
-    },
-  ]
 
   const isMarkdown = challenge.description.startsWith("{")
   const description = isMarkdown
@@ -159,7 +99,7 @@ export default async function Page({
       </div>
 
       <section className="my-10 w-full">
-        <ChallengeCalendar events={events} />
+        <ChallengeCalendar events={calendarEvents} />
       </section>
     </div>
   )
