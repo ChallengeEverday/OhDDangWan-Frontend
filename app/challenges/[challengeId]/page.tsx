@@ -98,9 +98,10 @@ export default async function Page({
         </Card>
       </div>
 
-      <section className="my-10 w-full">
+      {/* <section className="my-10 w-full">
         <ChallengeCalendar events={calendarEvents} />
-      </section>
+      </section> 
+      */}
     </div>
   )
 }
