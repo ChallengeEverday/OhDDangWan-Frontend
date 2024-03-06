@@ -16,6 +16,7 @@ import { get_challenges } from "@/app/utils/service/challenge"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { useInView } from "react-intersection-observer"
 import dayjs from "dayjs"
+import ChallengeListLoading from "./ChallengeListLoading"
 
 export default function ChallengeList() {
   const { ref, inView } = useInView()
@@ -49,6 +50,12 @@ export default function ChallengeList() {
       fetchNextPage()
     }
   }, [inView])
+
+  if (!data) return (
+    <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+      <ChallengeListLoading />
+    </div>
+  )
 
   return (
     <>
@@ -110,20 +117,27 @@ export default function ChallengeList() {
             )}
           </React.Fragment>
         ))}
+        {
+          isFetchingNextPage && <ChallengeListLoading length={6} />
+        }
       </div>
+
       <div ref={ref} className="w-full flex justify-center items-center my-14">
-        <Button
-          variant="flat"
-          onClick={() => fetchNextPage()}
-          disabled={!hasNextPage || isFetchingNextPage}
-          isLoading={isFetchingNextPage}
-        >
-          {isFetchingNextPage
-            ? "로딩 중..."
-            : hasNextPage
-              ? "더 불러오기"
-              : "마지막 입니다."}
-        </Button>
+        {
+          data &&
+          <Button
+            variant="flat"
+            onClick={() => fetchNextPage()}
+            disabled={!hasNextPage || isFetchingNextPage}
+            isLoading={isFetchingNextPage}
+          >
+            {isFetchingNextPage
+              ? "로딩 중..."
+              : hasNextPage
+                ? "더 불러오기"
+                : "마지막 입니다."}
+          </Button>
+        }
       </div>
     </>
   )
