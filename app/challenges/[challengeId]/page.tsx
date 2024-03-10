@@ -16,6 +16,7 @@ import {
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io"
 import { CommentInput } from "./components/CommentInput"
 import { CommentList } from "./components/CommentList"
+import dayjs from "dayjs"
 
 export default async function Page({
   params,
@@ -30,6 +31,8 @@ export default async function Page({
   const description = isMarkdown
     ? JSON.parse(challenge.description)
     : challenge.description
+
+  const isEnded = dayjs(challenge.challengeEndDate).isBefore(dayjs())
 
   return (
     <div className="w-full relative">
@@ -67,7 +70,9 @@ export default async function Page({
                   <IoIosHeartEmpty size="24" />
                 )}
               </Button>
-              <Button color="primary">참여하기</Button>
+              <Button isDisabled={isEnded} color="primary">
+                참여하기
+              </Button>
             </div>
           </CardHeader>
 
