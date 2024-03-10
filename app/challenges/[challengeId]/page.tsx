@@ -13,10 +13,10 @@ import {
   Chip,
   Button,
 } from "@nextui-org/react"
-import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io"
 import { CommentInput } from "./components/CommentInput"
 import { CommentList } from "./components/CommentList"
 import dayjs from "dayjs"
+import LikeButton from "./components/LikeButton"
 
 export default async function Page({
   params,
@@ -63,13 +63,7 @@ export default async function Page({
           <CardHeader className="w-full flex justify-between items-center">
             <h2 className="font-bold text-xl md:text-2xl">{challenge.title}</h2>
             <div className="flex gap-1">
-              <Button color="primary" variant="light" isIconOnly>
-                {true ? (
-                  <IoIosHeart size="24" />
-                ) : (
-                  <IoIosHeartEmpty size="24" />
-                )}
-              </Button>
+              <LikeButton challengeId={params.challengeId} />
               <Button isDisabled={isEnded} color="primary">
                 참여하기
               </Button>

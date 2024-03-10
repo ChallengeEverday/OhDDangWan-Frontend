@@ -68,3 +68,39 @@ export const post_challenges = async (challengeForm: POST_ChallengeForm) => {
     throw new Error("챌린지를 생성하는데 실패하였습니다. post /v1/challenges")
   }
 }
+
+export const get_challenges_$challengeId_likes = async (id: string) => {
+  try {
+    const result = await api.get<boolean>(`/v1/challenges/${id}/likes`)
+    return result
+  } catch (e) {
+    console.error(e)
+    throw new Error(
+      `챌린지 좋아요를 불러오는데 실패하였습니다. get /v1/challenges/${id}/likes`,
+    )
+  }
+}
+
+export const post_challenges_$challengeId_likes = async (id: string) => {
+  try {
+    const result = await api.post(`/v1/challenges/${id}/likes`)
+    return result
+  } catch (e) {
+    console.error(e)
+    throw new Error(
+      `챌린지 좋아요를 누르는데 실패하였습니다. post /v1/challenges/${id}/likes`,
+    )
+  }
+}
+
+export const delete_challenges_$challengeId_likes = async (id: string) => {
+  try {
+    const result = await api.delete(`/v1/challenges/${id}/likes`)
+    return result
+  } catch (e) {
+    console.error(e)
+    throw new Error(
+      `챌린지 좋아요를 취소하는데 실패하였습니다. delete /v1/challenges/${id}/likes`,
+    )
+  }
+}
