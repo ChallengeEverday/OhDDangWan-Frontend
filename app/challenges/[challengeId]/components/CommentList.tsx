@@ -15,7 +15,6 @@ import { CommentResponseDto } from "@/app/utils/types/comments"
 
 export function CommentList() {
   const params = useParams()
-  const myInfo = useUserInfoStore((state) => state.userInfo)
   const [editCommentId, setEditCommentId] = useState(-1)
 
   const getComments = async (pageParam: number) => {
@@ -46,10 +45,6 @@ export function CommentList() {
         return firstPage.metadata.currentPageNumber - 1
       },
     })
-
-  const deleteComment = async (commentId: number) => {
-    await delete_comments_$commentId(commentId)
-  }
 
   return (
     <ul>
