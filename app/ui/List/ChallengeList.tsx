@@ -51,11 +51,12 @@ export default function ChallengeList() {
     }
   }, [inView])
 
-  if (!data) return (
-    <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-      <ChallengeListLoading />
-    </div>
-  )
+  if (!data)
+    return (
+      <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+        <ChallengeListLoading />
+      </div>
+    )
 
   return (
     <>
@@ -71,7 +72,7 @@ export default function ChallengeList() {
                 thumbnailImageUrl,
                 hashtags,
               }) => (
-                <Link key={id} href={`./challenges/${id}`}>
+                <Link key={id} href={`/challenges/${id}`}>
                   <Card shadow="sm" className="pb-4">
                     <Image
                       aria-hidden
@@ -117,14 +118,11 @@ export default function ChallengeList() {
             )}
           </React.Fragment>
         ))}
-        {
-          isFetchingNextPage && <ChallengeListLoading length={6} />
-        }
+        {isFetchingNextPage && <ChallengeListLoading length={6} />}
       </div>
 
       <div ref={ref} className="w-full flex justify-center items-center my-14">
-        {
-          data &&
+        {data && (
           <Button
             variant="flat"
             onClick={() => fetchNextPage()}
@@ -137,7 +135,7 @@ export default function ChallengeList() {
                 ? "더 불러오기"
                 : "마지막 입니다."}
           </Button>
-        }
+        )}
       </div>
     </>
   )

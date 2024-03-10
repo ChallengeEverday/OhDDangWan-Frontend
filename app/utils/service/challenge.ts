@@ -1,4 +1,5 @@
 import {
+  ChallengeCategory,
   ChallengeMainResponseDto,
   GET_ChallengeMainResponseDto,
   GET_params_challenges,
@@ -28,6 +29,22 @@ export const get_challenges = async (params?: GET_params_challenges) => {
     console.error(e)
     throw new Error(
       `챌린지를 불러오는데 실패하였습니다. get /v1/challenges?${queryString}}`,
+    )
+  }
+}
+
+export const get_challenges_category_$category = async (
+  category: ChallengeCategory,
+) => {
+  try {
+    const result = await api.get<Pagenation<ChallengeMainResponseDto[]>>(
+      `/v1/challenges/category/${category}`,
+    )
+    return result
+  } catch (e) {
+    console.error(e)
+    throw new Error(
+      `챌린지를 불러오는데 실패하였습니다. get /v1/challenges/category/${category}`,
     )
   }
 }

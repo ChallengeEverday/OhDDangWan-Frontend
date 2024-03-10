@@ -1,3 +1,31 @@
+export enum ChallengeCategory {
+  운동 = "EXERCISE",
+  생활습관 = "HABIT",
+  독서 = "READING",
+  학습 = "STUDY",
+}
+export enum ChallengeCategoryKo {
+  EXERCISE = "운동",
+  HABIT = "생활습관",
+  READING = "독서",
+  STUDY = "학습",
+}
+
+export type ChallengeCategoryKey = keyof typeof ChallengeCategory
+export const CHALLENGE_CATEGORY_LIST = Object.keys(
+  ChallengeCategory,
+) as ChallengeCategoryKey[]
+
+export const CHALLENGE_CATEGORY_NAV_LIST: {
+  category: ChallengeCategoryKey
+  emoji: string
+}[] = [
+  { category: "운동", emoji: "🏋️‍♂️" },
+  { category: "생활습관", emoji: "🧘‍♂️" },
+  { category: "독서", emoji: "📚" },
+  { category: "학습", emoji: "📖" },
+]
+
 export type ChallengeForm = {
   /** 챌린지 제목 */
   title: POST_ChallengeForm["title"]
