@@ -11,6 +11,7 @@ import { useInfiniteQuery } from "@tanstack/react-query"
 import { useParams } from "next/navigation"
 import React, { useState } from "react"
 import { CommentUpdateInput } from "./CommentUpdateInput"
+import { CommentResponseDto } from "@/app/utils/types/comments"
 
 export function CommentList() {
   const params = useParams()
@@ -59,7 +60,7 @@ export function CommentList() {
       ) : null}
       {data?.pages.map(({ result, metadata }) => (
         <React.Fragment key={metadata.currentPageNumber}>
-          {result.map(({ commentId, parentId, userId, content, children }) => (
+          {result.map(({ commentId, content, ...restProps }) => (
             <li className="w-full" key={commentId}>
               {editCommentId === commentId ? (
                 <CommentUpdateInput
@@ -70,12 +71,10 @@ export function CommentList() {
               ) : (
                 <Comment
                   commentId={commentId}
-                  userId={userId}
                   content={content}
-                  deleteComment={deleteComment}
                   refetch={refetch}
-                  myInfo={myInfo}
                   setEditCommentId={setEditCommentId}
+                  {...restProps}
                 />
               )}
               <Divider />
@@ -98,27 +97,32 @@ export function CommentList() {
   )
 }
 
+type CommentProps = {
+  refetch: () => void
+  setEditCommentId: (id: number) => void
+} & CommentResponseDto
+
 function Comment({
   commentId,
-  myInfo,
   userId,
+  userName,
+  profileImageUrl,
   content,
-  deleteComment,
   refetch,
   setEditCommentId,
-}: any) {
+}: CommentProps) {
+  const myInfo = useUserInfoStore((state) => state.userInfo)
+
   return (
     <div className="w-full flex flex-col justify-start items-start gap-2 p-3">
       <div className="flex w-full justify-between items-center">
         <User
-          name={"이름"}
-          avatarProps={
-            {
-              // src: challenge.ownerProfileImageUrl,
-            }
-          }
+          name={userName}
+          avatarProps={{
+            src: profileImageUrl,
+          }}
         />
-        {myInfo?.userId !== userId ? (
+        {myInfo?.userId === userId ? (
           <div className="flex h-5 items-center space-x-4 text-small">
             <button
               onClick={() => {
@@ -131,7 +135,7 @@ function Comment({
             <Divider orientation="vertical" />
             <button
               onClick={async () => {
-                await deleteComment(commentId)
+                await delete_comments_$commentId(commentId)
                 refetch()
               }}
               className="text-primary-400"

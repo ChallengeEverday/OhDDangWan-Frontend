@@ -9,9 +9,11 @@ export type POST_params_comments = {
 }
 
 export type CommentResponseDto = {
-  commentId: 0
-  parentId: 0
-  userId: 0
+  commentId: number
+  parentId: number
+  userId: number
+  userName: string
+  profileImageUrl: string
   content: string
-  children: string[]
+  children: CommentResponseDto[]
 }
