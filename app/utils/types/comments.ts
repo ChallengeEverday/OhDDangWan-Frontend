@@ -16,4 +16,6 @@ export type CommentResponseDto = {
   profileImageUrl: string
   content: string
   children: CommentResponseDto[]
+  createdAt: string
+  modifiedAt: string
 }

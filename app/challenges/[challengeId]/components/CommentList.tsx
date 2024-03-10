@@ -12,6 +12,7 @@ import { useParams } from "next/navigation"
 import React, { useState } from "react"
 import { CommentUpdateInput } from "./CommentUpdateInput"
 import { CommentResponseDto } from "@/app/utils/types/comments"
+import TimeAgo from "@/app/ui/TimeAgo"
 
 export function CommentList() {
   const params = useParams()
@@ -105,18 +106,30 @@ function Comment({
   content,
   refetch,
   setEditCommentId,
+  createdAt,
+  modifiedAt,
 }: CommentProps) {
   const myInfo = useUserInfoStore((state) => state.userInfo)
 
   return (
     <div className="w-full flex flex-col justify-start items-start gap-2 p-3">
       <div className="flex w-full justify-between items-center">
-        <User
-          name={userName}
-          avatarProps={{
-            src: profileImageUrl,
-          }}
-        />
+        <div className="flex justify-center items-center gap-2">
+          <User
+            name={userName}
+            avatarProps={{
+              src: profileImageUrl,
+            }}
+          />
+          <span className="text-xs text-foreground-400">
+            <TimeAgo date={modifiedAt} />
+          </span>
+          {createdAt !== modifiedAt && (
+            <span className="text-xs text-foreground-400 text-primary-300">
+              수정됨
+            </span>
+          )}
+        </div>
         {myInfo?.userId === userId ? (
           <div className="flex h-5 items-center space-x-4 text-small">
             <button
