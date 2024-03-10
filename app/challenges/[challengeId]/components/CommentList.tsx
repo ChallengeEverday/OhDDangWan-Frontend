@@ -13,8 +13,9 @@ import React, { useState } from "react"
 import { CommentUpdateInput } from "./CommentUpdateInput"
 import { CommentResponseDto } from "@/app/utils/types/comments"
 import TimeAgo from "@/app/ui/TimeAgo"
+import { FaCrown } from "react-icons/fa6"
 
-export function CommentList() {
+export function CommentList({ ownerId }: { ownerId: number }) {
   const params = useParams()
   const [editCommentId, setEditCommentId] = useState(-1)
 
@@ -66,6 +67,7 @@ export function CommentList() {
                 />
               ) : (
                 <Comment
+                  ownerId={ownerId}
                   commentId={commentId}
                   content={content}
                   refetch={refetch}
@@ -94,11 +96,13 @@ export function CommentList() {
 }
 
 type CommentProps = {
+  ownerId: number
   refetch: () => void
   setEditCommentId: (id: number) => void
 } & CommentResponseDto
 
 function Comment({
+  ownerId,
   commentId,
   userId,
   userName,
@@ -115,12 +119,21 @@ function Comment({
     <div className="w-full flex flex-col justify-start items-start gap-2 p-3">
       <div className="flex w-full justify-between items-center">
         <div className="flex justify-center items-center gap-2">
-          <User
-            name={userName}
-            avatarProps={{
-              src: profileImageUrl,
-            }}
-          />
+          <div className="relative">
+            <User
+              name={userName}
+              avatarProps={{
+                src: profileImageUrl,
+              }}
+            />
+            {ownerId === userId ? (
+              <FaCrown
+                className="absolute text-yellow-300 -top-3 -left-1 -rotate-[31deg] scale-y-[0.7]"
+                size={20}
+              />
+            ) : null}
+          </div>
+
           <span className="text-xs text-foreground-400">
             <TimeAgo date={modifiedAt} />
           </span>

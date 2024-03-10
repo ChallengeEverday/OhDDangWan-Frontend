@@ -132,6 +132,7 @@ export type GET_ChallengeMainResponseDto = {
   challengeStartDate: string
   challengeEndDate: string
   ownerNickname: string
+  ownerId: number
   ownerProfileImageUrl: string
   thumbnailImageUrl: string
   hashtags: string[]

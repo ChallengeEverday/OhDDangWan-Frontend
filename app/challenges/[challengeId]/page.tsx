@@ -101,7 +101,7 @@ export default async function Page({
 
       <section className="my-10 w-full">
         <CommentInput />
-        <CommentList />
+        <CommentList ownerId={challenge.ownerId} />
       </section>
 
       {/*
