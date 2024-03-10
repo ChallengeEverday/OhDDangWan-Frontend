@@ -3,15 +3,19 @@ import { get_user_myProfile } from "../service/account"
 import { useUserInfoStore } from "../store/userInfoStore"
 
 export const useInitUser = () => {
-  const userInfo = useUserInfoStore((state) => state.userInfo)
   const setUserInfo = useUserInfoStore((state) => state.setUserInfo)
   const removeUserInfo = useUserInfoStore((state) => state.removeUserInfo)
 
   useAsync(async () => {
-    const { data } = await get_user_myProfile()
-    if (!userInfo && data) {
-      setUserInfo(data)
-    } else if (userInfo && !data) removeUserInfo()
-    if (userInfo && !data) removeUserInfo()
+    try {
+      const { data } = await get_user_myProfile()
+      if (data) {
+        setUserInfo(data)
+        return
+      }
+      removeUserInfo()
+    } catch (e) {
+      removeUserInfo()
+    }
   }, [])
 }
