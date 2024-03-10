@@ -1,9 +1,9 @@
 import ChallengeCategoryNav from "@/app/ui/List/ChallengeCategoryNav"
-import ChallengeList from "@/app/ui/List/ChallengeList"
 import {
   ChallengeCategory,
   ChallengeCategoryKo,
 } from "@/app/utils/types/challenge"
+import ChallengeList from "./ChallengeList"
 
 export default function ChallengeCategoryPage({
   params,
@@ -15,7 +15,7 @@ export default function ChallengeCategoryPage({
   return (
     <main>
       <ChallengeCategoryNav category={params.category} />
-      <ChallengeList />
+      <ChallengeList category={params.category} />
     </main>
   )
 }

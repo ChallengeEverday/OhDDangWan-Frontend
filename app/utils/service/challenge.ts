@@ -2,6 +2,7 @@ import {
   ChallengeCategory,
   ChallengeMainResponseDto,
   GET_ChallengeMainResponseDto,
+  GET_params_category_challenges,
   GET_params_challenges,
   POST_ChallengeForm,
   Pagenation,
@@ -35,16 +36,26 @@ export const get_challenges = async (params?: GET_params_challenges) => {
 
 export const get_challenges_category_$category = async (
   category: ChallengeCategory,
+  params?: GET_params_category_challenges,
 ) => {
+  const paramsDefault = {
+    page: 0,
+    size: 12,
+    sort: "desc",
+    sortKey: "created_at",
+    ...params,
+  }
+  const queryString = new URLSearchParams(paramsDefault as any).toString()
+
   try {
     const result = await api.get<Pagenation<ChallengeMainResponseDto[]>>(
-      `/v1/challenges/category/${category}`,
+      `/v1/challenges/category/${category}?${queryString}`,
     )
     return result
   } catch (e) {
     console.error(e)
     throw new Error(
-      `챌린지를 불러오는데 실패하였습니다. get /v1/challenges/category/${category}`,
+      `챌린지를 불러오는데 실패하였습니다. get /v1/challenges/category/${category}?${queryString}`,
     )
   }
 }
