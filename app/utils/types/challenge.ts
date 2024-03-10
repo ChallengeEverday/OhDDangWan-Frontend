@@ -87,6 +87,7 @@ export type ChallengeDto = {
   challengeStartDate: string
   challengeEndDate: string
   ownerId: number
+  participantsCount: number
   thumbnailImageUrl?: string
   hashtags: string[]
 }
@@ -114,6 +115,8 @@ export type ChallengeMainResponseDto = {
   authenticationDateTime: string
   /** 챌린지 검색 해시태그 */
   hashtags: string[]
+  /** 참여자 수 */
+  participantsCount: number
 
   /** 챌린지 인증 방법 */
   authenticationDescription: string

@@ -69,6 +69,7 @@ export default function ChallengeList() {
                 title,
                 challengeCreatedAt,
                 description,
+                participantsCount,
                 thumbnailImageUrl,
                 hashtags,
               }) => (
@@ -86,8 +87,7 @@ export default function ChallengeList() {
                         className="flex absolute top-3 right-2 z-20"
                         color="primary"
                       >
-                        {/* TODO: BE members */}
-                        100
+                        {participantsCount}
                       </Chip>
                     </CardHeader>
                     <CardBody className="pb-0 pt-2 px-4 flex-col items-start">
