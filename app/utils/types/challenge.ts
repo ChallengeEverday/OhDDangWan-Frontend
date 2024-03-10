@@ -51,6 +51,8 @@ export type ChallengeForm = {
   thumbnailImage?: File
   /** 챌린지 검색 해시태그 */
   hashtags: POST_ChallengeForm["hashtags"]
+  /** 챌린지 카테고리 */
+  category: ChallengeCategory
 }
 
 export type POST_ChallengeForm = {
@@ -70,6 +72,8 @@ export type POST_ChallengeForm = {
   thumbnailImageUrl?: string
   /** 챌린지 검색 해시태그 */
   hashtags: string[]
+  /** 챌린지 카테고리 */
+  category: ChallengeCategory
 }
 
 export type ChallengeDto = {

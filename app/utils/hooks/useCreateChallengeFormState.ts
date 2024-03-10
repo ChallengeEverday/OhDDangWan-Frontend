@@ -1,5 +1,5 @@
 import { createReducerContext } from "react-use"
-import { ChallengeForm } from "@/app/utils/types/challenge"
+import { ChallengeCategory, ChallengeForm } from "@/app/utils/types/challenge"
 import { 요일, 요일별한글 } from "@/app/utils/dayjs"
 
 type ChallengeAction =
@@ -37,6 +37,7 @@ type ChallengeAction =
   | { type: "REMOVE_HASHTAG"; hashtag: string }
   | { type: "RESET_HASHTAGS" }
   | { type: "RESET_CHALLENGE" }
+  | { type: "SET_CATEGORY"; category: ChallengeCategory }
 
 const reducer = (state: ChallengeForm, action: ChallengeAction) => {
   switch (action.type) {
@@ -103,6 +104,11 @@ const reducer = (state: ChallengeForm, action: ChallengeAction) => {
 
     case "RESET_CHALLENGE":
       return initialState
+
+    // 챌린지 카테고리
+    case "SET_CATEGORY":
+      return { ...state, category: action.category }
+
     default:
       return state
   }
@@ -123,6 +129,8 @@ const initialState: ChallengeForm = {
   challengeCycle: [false, false, false, false, false, false, false],
   /** 챌린지 검색 해시태그 */
   hashtags: [],
+  /** 챌린지 카테고리 */
+  category: ChallengeCategory.운동,
 }
 
 export const [useChallengeForm, ChallengeFormProvider] = createReducerContext(

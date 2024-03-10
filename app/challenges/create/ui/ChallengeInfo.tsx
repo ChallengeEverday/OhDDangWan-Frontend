@@ -1,6 +1,11 @@
+import CategoryItem from "@/app/ui/CategoryButton"
 import Editor from "@/app/ui/Editor/Editor"
 import { useChallengeForm } from "@/app/utils/hooks/useCreateChallengeFormState"
 import { useFormStatus } from "@/app/utils/hooks/useFormStatus"
+import {
+  CHALLENGE_CATEGORY_NAV_LIST,
+  ChallengeCategory,
+} from "@/app/utils/types/challenge"
 import { Card, Chip, Divider, Image, Input, Textarea } from "@nextui-org/react"
 import { useRef, useState } from "react"
 import { LuUpload } from "react-icons/lu"
@@ -164,6 +169,35 @@ export default function ChallengeInfo() {
               </div>
             </button>
           </Card>
+
+          <div className="my-4">
+            <h2 className="mb-1 font-bold text-base">카테고리</h2>
+            <ul className="w-full overflow-x-scroll flex gap-4">
+              {CHALLENGE_CATEGORY_NAV_LIST.map(
+                ({ category: categoryLi, emoji }) => (
+                  <li key={categoryLi}>
+                    <button
+                      onClick={() => {
+                        dispatch({
+                          type: "SET_CATEGORY",
+                          category: ChallengeCategory[categoryLi],
+                        })
+                      }}
+                    >
+                      <CategoryItem
+                        isActive={
+                          challengeForm.category ===
+                          ChallengeCategory[categoryLi]
+                        }
+                        emoji={emoji}
+                        category={categoryLi}
+                      />
+                    </button>
+                  </li>
+                ),
+              )}
+            </ul>
+          </div>
         </section>
       </div>
     </>
