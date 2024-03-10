@@ -14,7 +14,6 @@ export default function TimeAgo({ date }: { date: string }) {
   useEffect(() => {
     const updateTimeAgo = () => {
       const formattedDate = dayjs.utc(date).tz("Asia/Seoul")
-      console.log({ date, formattedDate })
       const diffInMinutes = dayjs().diff(formattedDate, "minute")
 
       if (diffInMinutes < 1) {
