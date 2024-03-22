@@ -3,6 +3,7 @@ import { Noto_Sans_KR } from "next/font/google"
 import "@/app/ui/style/globals.css"
 import { Providers } from "./providers"
 import GNB from "@/app/ui/Layout/GNB"
+import 'react-toastify/dist/ReactToastify.css';
 
 const notoSans = Noto_Sans_KR({
   weight: ["300", "400", "700", "800"],

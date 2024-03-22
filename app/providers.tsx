@@ -6,6 +6,7 @@ import usePrefersDarkMode from "./utils/hooks/usePrefersDarkMode"
 import { QueryClientProvider } from "@tanstack/react-query"
 import { useInitUser } from "./utils/hooks/useInitUser"
 import { queryClient } from "./utils/service/query"
+import { ToastContainer } from 'react-toastify';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const prefersDarkMode = usePrefersDarkMode()
@@ -22,6 +23,18 @@ export function Providers({ children }: { children: React.ReactNode }) {
           {children}
         </NextThemesProvider>
       </NextUIProvider>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover={false}
+        theme="colored"
+      />
     </QueryClientProvider>
   )
 }
