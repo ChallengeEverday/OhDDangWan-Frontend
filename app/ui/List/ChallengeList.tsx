@@ -34,7 +34,7 @@ export default function ChallengeList() {
       getNextPageParam: (lastPage) => {
         if (
           lastPage.metadata.currentPageNumber ===
-          lastPage.metadata.totalPageCount
+          lastPage.metadata.totalPageCount - 1
         )
           return null
         return lastPage.metadata.currentPageNumber + 1
