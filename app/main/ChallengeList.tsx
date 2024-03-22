@@ -7,8 +7,8 @@ import {
 import { get_challenges } from "@/app/utils/service/challenge"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { useInView } from "react-intersection-observer"
-import ChallengeListLoading from "../ui/List/ChallengeListLoading"
 import ChallengeLink from "../ui/List/ChallengeLink"
+import ChallengeListLoading from "../ui/List/ChallengeListLoading"
 
 export default function ChallengeList() {
   const { ref, inView } = useInView()

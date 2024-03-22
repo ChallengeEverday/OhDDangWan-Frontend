@@ -3,8 +3,8 @@
 import { useRouter } from "next/navigation"
 import { useUserInfoStore } from "../utils/store/userInfoStore"
 import { Avatar, Divider } from "@nextui-org/react"
-import ChallengeList from "../ui/List/ChallengeList"
 import { useEffect } from "react"
+import ChallengeList from "../main/ChallengeList"
 
 export default function MyPage() {
   const router = useRouter()
