@@ -10,17 +10,24 @@ const images = {
   STUDY: "/thumbnails/study.jpg",
 } as const
 
-export default function Thumbnail ({ alt, type, url }: { alt: string, type: ChallengeCategoryKeyEn, url?: string }) {
-  const imageUrl = url || images[type]
+type ThumbnailProps = {
+  alt: string
+  type: ChallengeCategoryKeyEn
+  url?: string
+  style?: string
+}
+
+export default function Thumbnail ({ alt, type, url, style }: ThumbnailProps) {
+  const imageUrl = url || images[type] || "/skelleton.png"
 
   return (
     <Image
       aria-hidden
       alt={type}
       removeWrapper
-      className="aspect-[5/3] object-cover md:aspect-[4/3] w-full"
+      className={`aspect-[5/3] object-cover md:aspect-[4/3] w-full ${style}`}
       src={imageUrl}
-      fallbackSrc="/running.avif"
+      fallbackSrc="/skelleton.png"
     />
   )
 }

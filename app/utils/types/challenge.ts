@@ -124,6 +124,7 @@ export type ChallengeMainResponseDto = {
   hashtags: string[]
   /** 참여자 수 */
   participantsCount: number
+  category: ChallengeCategory
 
   /** 챌린지 인증 방법 */
   authenticationDescription: string

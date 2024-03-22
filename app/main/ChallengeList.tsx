@@ -4,36 +4,29 @@ import React, { useEffect } from "react"
 import {
   Button,
 } from "@nextui-org/react"
-import { get_challenges_category_$category } from "@/app/utils/service/challenge"
+import { get_challenges } from "@/app/utils/service/challenge"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { useInView } from "react-intersection-observer"
-import ChallengeListLoading from "@/app/ui/List/ChallengeListLoading"
-import { ChallengeCategory } from "@/app/utils/types/challenge"
-import ChallengeLink from "@/app/ui/List/ChallengeLink"
+import ChallengeListLoading from "../ui/List/ChallengeListLoading"
+import ChallengeLink from "../ui/List/ChallengeLink"
 
-export default function ChallengeList({
-  category,
-}: {
-  category: ChallengeCategory
-}) {
+export default function ChallengeList() {
   const { ref, inView } = useInView()
 
   const getChallenges = async (pageParam: number) => {
-    const { data } = await get_challenges_category_$category(category, {
-      page: pageParam,
-    })
+    const { data } = await get_challenges({ page: pageParam })
     return data
   }
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: ["challenges", category],
+      queryKey: ["challenges"],
       queryFn: ({ pageParam }) => getChallenges(pageParam),
       initialPageParam: 0,
       getNextPageParam: (lastPage) => {
         if (
           lastPage.metadata.currentPageNumber ===
-          lastPage.metadata.totalPageCount
+          lastPage.metadata.totalPageCount - 1
         )
           return null
         return lastPage.metadata.currentPageNumber + 1
