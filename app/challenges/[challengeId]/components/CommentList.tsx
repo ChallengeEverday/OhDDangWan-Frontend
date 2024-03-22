@@ -135,7 +135,7 @@ function Comment({
           </div>
 
           <span className="text-xs text-foreground-400">
-            <TimeAgo date={modifiedAt} />
+            <TimeAgo date={createdAt} />
           </span>
           {createdAt !== modifiedAt && (
             <span className="text-xs text-foreground-400 text-primary-300">
