@@ -134,6 +134,8 @@ export type ChallengeMainResponseDto = {
   challengeCycle: number
   /** 방장 id */
   ownerId: number
+
+  challengeEndDate: string
 }
 
 export type GET_ChallengeMainResponseDto = {

@@ -20,6 +20,8 @@ import JoinButton from "./components/JoinButton";
 import Thumbnail from "./components/Thumbnail"
 import TimeAgo from "@/app/ui/TimeAgo"
 import { ChallengeCategoryEmoji, ChallengeCategoryKo } from "@/app/utils/types/challenge"
+import ProgressChip from "@/app/ui/Chip/ProgressChip"
+import CategoryChip from "@/app/ui/Chip/CategoryChip"
 
 export default async function Page({
   params,
@@ -42,41 +44,12 @@ export default async function Page({
   return (
     <div className="w-full relative">
       <DebugLog object={challenge} modal={searchParams.modal} />
-    <div className="text-tiny m-3 absolute z-20 left-0 flex gap-1">
-        {isOngoing
-          ? <Chip
-              variant="solid"
-              color={"primary"}
-            >
-            진행 중
-            </Chip>
-          : null}
-
-        {isEnded
-          ? <Chip
-              variant="solid"
-              color={"default"}
-            >
-            종료
-            </Chip>
-          : null}
-
-        {(!isStarted && !isEnded)
-          ? <Chip
-              variant="solid"
-              color={"success"}
-            >
-              예정
-            </Chip>
-          : null}
-
-        <Chip
-          classNames={{
-            base: "bg-gray-900 text-white",
-          }}
-        >
-        {ChallengeCategoryKo[challenge.category]} {ChallengeCategoryEmoji[challenge.category]}
-        </Chip>
+      <div className="text-tiny m-3 absolute z-20 left-0 flex gap-1">
+        <ProgressChip
+          startDate={challenge.challengeStartDate}
+          endDate={challenge.challengeEndDate}
+        />
+        <CategoryChip category={challenge.category} />
       </div>
 
       <div className="flex flex-col justify-center gap-5 relative md:flex-row">

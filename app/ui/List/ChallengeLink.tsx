@@ -10,6 +10,8 @@ import Link from "next/link"
 import dayjs from "dayjs"
 import Thumbnail from "@/app/challenges/[challengeId]/components/Thumbnail"
 import { ChallengeMainResponseDto } from "@/app/utils/types/challenge"
+import ProgressChip from "../Chip/ProgressChip"
+import CategoryChip from "../Chip/CategoryChip"
 
 export default function ChallengeLink({
   id,
@@ -19,6 +21,8 @@ export default function ChallengeLink({
   thumbnailImageUrl,
   hashtags,
   category,
+  challengeStartDate,
+  challengeEndDate,
 }: ChallengeMainResponseDto) {
   return (
     <Link key={id} href={`/challenges/${id}`}>
@@ -32,6 +36,13 @@ export default function ChallengeLink({
           />
         </div>
         <CardHeader className="reletive overflow-visible py-0">
+          <div className="text-tiny m-3 absolute z-20 left-0 top-0 flex gap-1">
+            <ProgressChip
+              startDate={challengeStartDate}
+              endDate={challengeEndDate}
+            />
+            <CategoryChip category={category} />
+          </div>
           <Chip
             startContent={<IoMdPerson size="16" />}
             className="flex absolute top-3 right-2 z-20"
