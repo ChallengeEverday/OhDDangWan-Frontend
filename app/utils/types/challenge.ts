@@ -10,7 +10,14 @@ export enum ChallengeCategoryKo {
   READING = "독서",
   STUDY = "학습",
 }
+export enum ChallengeCategoryEmoji {
+  EXERCISE = "🏋️‍♂️",
+  HABIT = "🧘‍♂️",
+  READING = "📚",
+  STUDY = "📖",
+}
 
+export type ChallengeCategoryKeyEn = keyof typeof ChallengeCategoryKo
 export type ChallengeCategoryKey = keyof typeof ChallengeCategory
 export const CHALLENGE_CATEGORY_LIST = Object.keys(
   ChallengeCategory,
@@ -139,6 +146,7 @@ export type GET_ChallengeMainResponseDto = {
   ownerProfileImageUrl: string
   thumbnailImageUrl: string
   hashtags: string[]
+  category: ChallengeCategory
 }
 
 export type GET_params_challenges = {

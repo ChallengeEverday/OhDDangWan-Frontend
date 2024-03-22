@@ -17,6 +17,9 @@ import { CommentList } from "./components/CommentList"
 import dayjs from "dayjs"
 import LikeButton from "./components/LikeButton"
 import JoinButton from "./components/JoinButton";
+import Thumbnail from "./components/Thumbnail"
+import TimeAgo from "@/app/ui/TimeAgo"
+import { ChallengeCategoryEmoji, ChallengeCategoryKo } from "@/app/utils/types/challenge"
 
 export default async function Page({
   params,
@@ -32,29 +35,58 @@ export default async function Page({
     ? JSON.parse(challenge.description)
     : challenge.description
 
+  const isStarted = dayjs(challenge.challengeStartDate).isBefore(dayjs())
   const isEnded = dayjs(challenge.challengeEndDate).isBefore(dayjs())
+  const isOngoing = isStarted && !isEnded
 
   return (
     <div className="w-full relative">
       <DebugLog object={challenge} modal={searchParams.modal} />
-      {/* <Chip
-        variant="solid"
-        color="primary"
-        className="text-tiny py-2 m-3 absolute z-20 left-0"
-      >
-        {challenge.time}
-      </Chip> */}
+    <div className="text-tiny m-3 absolute z-20 left-0 flex gap-1">
+        {isOngoing
+          ? <Chip
+              variant="solid"
+              color={"primary"}
+            >
+            진행 중
+            </Chip>
+          : null}
+
+        {isEnded
+          ? <Chip
+              variant="solid"
+              color={"default"}
+            >
+            종료
+            </Chip>
+          : null}
+
+        {(!isStarted && !isEnded)
+          ? <Chip
+              variant="solid"
+              color={"success"}
+            >
+              예정
+            </Chip>
+          : null}
+
+        <Chip
+          classNames={{
+            base: "bg-gray-900 text-white",
+          }}
+        >
+        {ChallengeCategoryKo[challenge.category]} {ChallengeCategoryEmoji[challenge.category]}
+        </Chip>
+      </div>
+
       <div className="flex flex-col justify-center gap-5 relative md:flex-row">
-        {challenge.thumbnailImageUrl && (
-          <Image
-            aria-hidden
+        <div className="w-full rounded-xl">
+          <Thumbnail
             alt={challenge.title}
-            removeWrapper
-            className="aspect-[5/3] object-cover md:aspect-[4/3] md:w-1/2 w-full"
-            src={challenge.thumbnailImageUrl}
-            fallbackSrc="/running.avif"
+            type={challenge.category}
+            url={challenge.thumbnailImageUrl}
           />
-        )}
+        </div>
 
         <Card
           shadow="sm"
