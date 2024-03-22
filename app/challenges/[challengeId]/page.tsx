@@ -8,9 +8,13 @@ import {
   User,
   CardHeader,
   CardBody,
-  Image,
   Divider,
   Chip,
+  Button,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
 } from "@nextui-org/react"
 import { CommentInput } from "./components/CommentInput"
 import { CommentList } from "./components/CommentList"
@@ -18,10 +22,10 @@ import dayjs from "dayjs"
 import LikeButton from "./components/LikeButton"
 import JoinButton from "./components/JoinButton";
 import Thumbnail from "./components/Thumbnail"
-import TimeAgo from "@/app/ui/TimeAgo"
-import { ChallengeCategoryEmoji, ChallengeCategoryKo } from "@/app/utils/types/challenge"
 import ProgressChip from "@/app/ui/Chip/ProgressChip"
 import CategoryChip from "@/app/ui/Chip/CategoryChip"
+import { IoIosSettings } from "react-icons/io";
+import ChallengeSetting from "./components/ChallengeSetting"
 
 export default async function Page({
   params,
@@ -44,6 +48,7 @@ export default async function Page({
   return (
     <div className="w-full relative">
       <DebugLog object={challenge} modal={searchParams.modal} />
+
       <div className="text-tiny m-3 absolute z-20 left-0 flex gap-1">
         <ProgressChip
           startDate={challenge.challengeStartDate}
@@ -101,6 +106,10 @@ export default async function Page({
           </div>
         </Card>
       </div>
+
+      <section className="w-full flex justify-end gap-2 my-5">
+        <ChallengeSetting />
+      </section>
 
       <section className="my-10 w-full">
         <CommentInput />
