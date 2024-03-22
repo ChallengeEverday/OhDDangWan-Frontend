@@ -81,7 +81,7 @@ const reducer = (state: ChallengeForm, action: ChallengeAction) => {
     case "RESET_CHALLENGE_WEEKLY":
       return {
         ...state,
-        challengeCycle: initialState.challengeCycle,
+        challengeCycle: defaultChallengeForm.challengeCycle,
       }
 
     // 해시태그
@@ -100,10 +100,10 @@ const reducer = (state: ChallengeForm, action: ChallengeAction) => {
         hashtags: state.hashtags.filter((tag) => tag !== action.hashtag),
       }
     case "RESET_HASHTAGS":
-      return { ...state, hashtags: initialState.hashtags }
+      return { ...state, hashtags: defaultChallengeForm.hashtags }
 
     case "RESET_CHALLENGE":
-      return initialState
+      return defaultChallengeForm
 
     // 챌린지 카테고리
     case "SET_CATEGORY":
@@ -114,7 +114,7 @@ const reducer = (state: ChallengeForm, action: ChallengeAction) => {
   }
 }
 
-const initialState: ChallengeForm = {
+export const defaultChallengeForm: ChallengeForm = {
   /** 챌린지 제목 */
   title: "",
   /** 챌린지 설명 */
@@ -135,7 +135,7 @@ const initialState: ChallengeForm = {
 
 export const [useChallengeForm, ChallengeFormProvider] = createReducerContext(
   reducer,
-  initialState,
+  defaultChallengeForm,
 )
 
 export const checkInvalid = (challengeForm: ChallengeForm) => {

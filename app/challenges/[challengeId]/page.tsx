@@ -108,7 +108,7 @@ export default async function Page({
       </div>
 
       <section className="w-full flex justify-end gap-2 my-5">
-        <ChallengeSetting />
+        <ChallengeSetting challengeId={params.challengeId} />
       </section>
 
       <section className="my-10 w-full">

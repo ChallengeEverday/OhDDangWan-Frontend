@@ -9,7 +9,7 @@ import {
 } from "@nextui-org/react"
 import { IoIosSettings } from "react-icons/io";
 
-export default function ChallengeSetting() {
+export default function ChallengeSetting({ challengeId }: { challengeId: string }) {
   return (
     <Dropdown>
         <DropdownTrigger>
@@ -28,7 +28,7 @@ export default function ChallengeSetting() {
             if (key === "member") console.log("멤버 관리")
           }}
         >
-            <DropdownItem key="modify">챌린지 수정</DropdownItem>
+            <DropdownItem key="modify" href={`/challenges/${challengeId}/modify`}>챌린지 수정</DropdownItem>
             <DropdownItem key="member">멤버 관리</DropdownItem>
         </DropdownMenu>
     </Dropdown>
