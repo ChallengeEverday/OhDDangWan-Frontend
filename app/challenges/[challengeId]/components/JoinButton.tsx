@@ -1,13 +1,15 @@
 "use client"
 
 import {
+  get_challenges_participate_$challengeId_status,
   post_challenges_participate_$challengeId,
 } from "@/app/utils/service/challenge"
 import { isError } from "@/app/utils/types/api";
 import { Button } from "@nextui-org/react"
+import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify"
 
-export default function JoinButton({ joined, challengeId }: { joined: boolean; challengeId: string }) {
+export default function JoinButton({ challengeId }: { challengeId: string }) {
   const join = async () => {
     try {
       await post_challenges_participate_$challengeId(challengeId)
@@ -20,13 +22,21 @@ export default function JoinButton({ joined, challengeId }: { joined: boolean; c
     }
   }
 
+  const { data } = useQuery({
+    queryKey: ["challenges", challengeId, "participate"],
+    queryFn: () => get_challenges_participate_$challengeId_status(challengeId),
+    enabled: !!challengeId,
+  })
+
+  const isJoined = data?.data
+
   return (
     <Button
       onClick={join}
-      isDisabled={joined}
+      isDisabled={isJoined}
       color="primary"
     >
-      참여하기
+      {isJoined ? "참여중" : "참여하기"}
     </Button>
   )
 }

@@ -64,7 +64,7 @@ export default async function Page({
             <h2 className="font-bold text-xl md:text-2xl">{challenge.title}</h2>
             <div className="flex gap-1">
               <LikeButton challengeId={params.challengeId} />
-              <JoinButton joined={false} challengeId={params.challengeId} />
+              <JoinButton challengeId={params.challengeId} />
             </div>
           </CardHeader>
 

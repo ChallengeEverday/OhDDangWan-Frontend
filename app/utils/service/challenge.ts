@@ -155,3 +155,16 @@ export const post_challenges_participate_$challengeId = async (id: string) => {
     return Promise.reject(error)
   }
 }
+
+// 챌린지 참여 여부
+export const get_challenges_participate_$challengeId_status = async (id: string) => {
+  try {
+    const result = await api.get<boolean>(`/v1/challenges/participate/${id}/status`)
+    return result
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return Promise.reject(error.response?.data)
+    }
+    return Promise.reject(error)
+  }
+}
