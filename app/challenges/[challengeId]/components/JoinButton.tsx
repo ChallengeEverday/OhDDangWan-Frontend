@@ -9,7 +9,7 @@ import { Button } from "@nextui-org/react"
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify"
 
-export default function JoinButton({ challengeId }: { challengeId: string }) {
+export default function JoinButton({ challengeId, isEnded }: { challengeId: string, isEnded: boolean }) {
   const join = async () => {
     try {
       await post_challenges_participate_$challengeId(challengeId)
@@ -30,10 +30,12 @@ export default function JoinButton({ challengeId }: { challengeId: string }) {
 
   const isJoined = data?.data
 
+  if (isEnded) return null
+
   return (
     <Button
       onClick={join}
-      isDisabled={isJoined}
+      isDisabled={isJoined || isEnded}
       color="primary"
     >
       {isJoined ? "참여중" : "참여하기"}
