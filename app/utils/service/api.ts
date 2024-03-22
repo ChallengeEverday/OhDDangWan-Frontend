@@ -15,7 +15,7 @@ api.interceptors.response.use(
     //   window.location.href = "/login"
     //   useUserInfoStore.getState().removeUserInfo()
     // }
-    // return Promise.reject(error)
+    return Promise.reject(error)
   },
 )
 
