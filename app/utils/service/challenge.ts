@@ -1,3 +1,4 @@
+import axios from "axios"
 import {
   ChallengeCategory,
   ChallengeMainResponseDto,
@@ -9,6 +10,7 @@ import {
 } from "../types/challenge"
 import api from "./api"
 
+// 챌린지 목록
 export const get_challenges = async (params?: GET_params_challenges) => {
   const paramsDefault = {
     page: 0,
@@ -26,14 +28,15 @@ export const get_challenges = async (params?: GET_params_challenges) => {
     )
 
     return result
-  } catch (e) {
-    console.error(e)
-    throw new Error(
-      `챌린지를 불러오는데 실패하였습니다. get /v1/challenges?${queryString}}`,
-    )
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return Promise.reject(error.response?.data)
+    }
+    return Promise.reject(error)
   }
 }
 
+// 카테고리별 챌린지
 export const get_challenges_category_$category = async (
   category: ChallengeCategory,
   params?: GET_params_category_challenges,
@@ -52,14 +55,15 @@ export const get_challenges_category_$category = async (
       `/v1/challenges/category/${category}?${queryString}`,
     )
     return result
-  } catch (e) {
-    console.error(e)
-    throw new Error(
-      `챌린지를 불러오는데 실패하였습니다. get /v1/challenges/category/${category}?${queryString}`,
-    )
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return Promise.reject(error.response?.data)
+    }
+    return Promise.reject(error)
   }
 }
 
+// 챌린지 상세
 export const get_challenge_$challengeId = async (id: string) => {
   try {
     // const result: any = await fetch(
@@ -79,68 +83,75 @@ export const get_challenge_$challengeId = async (id: string) => {
       result.data,
     )
     return result.data
-  } catch (e) {
-    console.error(e)
-    throw new Error(
-      `챌린지를 불러오는데 실패하였습니다. get /v1/challenges/${id}`,
-    )
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return Promise.reject(error.response?.data)
+    }
+    return Promise.reject(error)
   }
 }
 
+// 챌린지 생성
 export const post_challenges = async (challengeForm: POST_ChallengeForm) => {
   try {
     const result = await api.post<number>("/v1/challenges", challengeForm)
     return result
-  } catch (e) {
-    console.error(e)
-    throw new Error("챌린지를 생성하는데 실패하였습니다. post /v1/challenges")
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return Promise.reject(error.response?.data)
+    }
+    return Promise.reject(error)
   }
 }
 
+// 좋아요 여부
 export const get_challenges_$challengeId_likes = async (id: string) => {
   try {
     const result = await api.get<boolean>(`/v1/challenges/${id}/likes`)
     return result
-  } catch (e) {
-    console.error(e)
-    throw new Error(
-      `챌린지 좋아요를 불러오는데 실패하였습니다. get /v1/challenges/${id}/likes`,
-    )
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return Promise.reject(error.response?.data)
+    }
+    return Promise.reject(error)
   }
 }
 
+// 좋아요
 export const post_challenges_$challengeId_likes = async (id: string) => {
   try {
     const result = await api.post(`/v1/challenges/${id}/likes`)
     return result
-  } catch (e) {
-    console.error(e)
-    throw new Error(
-      `챌린지 좋아요를 누르는데 실패하였습니다. post /v1/challenges/${id}/likes`,
-    )
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return Promise.reject(error.response?.data)
+    }
+    return Promise.reject(error)
   }
 }
 
+// 좋아요 취소
 export const delete_challenges_$challengeId_likes = async (id: string) => {
   try {
     const result = await api.delete(`/v1/challenges/${id}/likes`)
     return result
-  } catch (e) {
-    console.error(e)
-    throw new Error(
-      `챌린지 좋아요를 취소하는데 실패하였습니다. delete /v1/challenges/${id}/likes`,
-    )
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return Promise.reject(error.response?.data)
+    }
+    return Promise.reject(error)
   }
 }
 
-
+// 챌린지 참여
 export const post_challenges_participate_$challengeId = async (id: string) => {
   try {
     const result = await api.post(`/v1/challenges/participate/${id}`)
     return result
-  } catch (e) {
-    throw new Error(
-      `챌린지 참여하는데 실패하였습니다. post /v1/challenges/${id}/participate`,
-    )
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return Promise.reject(error.response?.data)
+    }
+    return Promise.reject(error)
   }
 }

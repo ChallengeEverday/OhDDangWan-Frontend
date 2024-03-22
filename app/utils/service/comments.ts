@@ -7,6 +7,7 @@ import {
 } from "../types/comments"
 import api from "./api"
 import { queryClient } from "./query"
+import axios from "axios"
 
 export const queryKey_comments_$challengeId = (challengeId: String) => [
   "challenges",
@@ -38,11 +39,11 @@ export const get_comments_$challengeId = async (
     )
 
     return result
-  } catch (e) {
-    console.error(e)
-    throw new Error(
-      `댓글을 불러오는데 실패하였습니다. get /v1/comments/${challengeId}/comments?${queryString}}`,
-    )
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return Promise.reject(error.response?.data)
+    }
+    return Promise.reject(error)
   }
 }
 
@@ -57,11 +58,11 @@ export const post_comments_$challengeId = async (
     )
 
     return result
-  } catch (e) {
-    console.error(e)
-    throw new Error(
-      `댓글을 생성하는데 실패하였습니다. post /v1/comments/${challengeId}`,
-    )
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return Promise.reject(error.response?.data)
+    }
+    return Promise.reject(error)
   }
 }
 
@@ -75,11 +76,11 @@ export const put_comments_$commentId = async (
     })
 
     return result
-  } catch (e) {
-    console.error(e)
-    throw new Error(
-      `댓글을 수정하는데 실패하였습니다. put /v1/comments/${content}`,
-    )
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return Promise.reject(error.response?.data)
+    }
+    return Promise.reject(error)
   }
 }
 
@@ -88,10 +89,10 @@ export const delete_comments_$commentId = async (commentId: number) => {
     const result = await api.delete(`/v1/comments/${commentId}`)
 
     return result
-  } catch (e) {
-    console.error(e)
-    throw new Error(
-      `댓글을 삭제하는데 실패하였습니다. delete /v1/comments/${commentId}`,
-    )
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return Promise.reject(error.response?.data)
+    }
+    return Promise.reject(error)
   }
 }
