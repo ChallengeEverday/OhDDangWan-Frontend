@@ -11,12 +11,12 @@ import {
   Image,
   Divider,
   Chip,
-  Button,
 } from "@nextui-org/react"
 import { CommentInput } from "./components/CommentInput"
 import { CommentList } from "./components/CommentList"
 import dayjs from "dayjs"
 import LikeButton from "./components/LikeButton"
+import JoinButton from "./components/JoinButton";
 
 export default async function Page({
   params,
@@ -64,9 +64,7 @@ export default async function Page({
             <h2 className="font-bold text-xl md:text-2xl">{challenge.title}</h2>
             <div className="flex gap-1">
               <LikeButton challengeId={params.challengeId} />
-              <Button isDisabled={isEnded} color="primary">
-                참여하기
-              </Button>
+              <JoinButton joined={false} challengeId={params.challengeId} />
             </div>
           </CardHeader>
 
@@ -107,7 +105,7 @@ export default async function Page({
       {/*
       <section className="my-10 w-full">
         <ChallengeCalendar events={calendarEvents} />
-      </section> 
+      </section>
       */}
     </div>
   )

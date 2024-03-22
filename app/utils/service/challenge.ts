@@ -132,3 +132,15 @@ export const delete_challenges_$challengeId_likes = async (id: string) => {
     )
   }
 }
+
+
+export const post_challenges_participate_$challengeId = async (id: string) => {
+  try {
+    const result = await api.post(`/v1/challenges/participate/${id}`)
+    return result
+  } catch (e) {
+    throw new Error(
+      `챌린지 참여하는데 실패하였습니다. post /v1/challenges/${id}/participate`,
+    )
+  }
+}
